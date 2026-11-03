@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+  html,
+  body {
+    background: #0c0e10;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* fade the canvas into the page so the line streams in and out of darkness */
+.scene-mask {
+  -webkit-mask-image: radial-gradient(120% 95% at 62% 52%, #000 52%, transparent 88%);
+  mask-image: radial-gradient(120% 95% at 62% 52%, #000 52%, transparent 88%);
+}
+@media (max-width: 767px) {
+  .scene-mask {
+    -webkit-mask-image: radial-gradient(140% 80% at 50% 66%, #000 45%, transparent 86%);
+    mask-image: radial-gradient(140% 80% at 50% 66%, #000 45%, transparent 86%);
+  }
+}
+
+/* station callouts rendered with drei <Html> */
+.callout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  white-space: nowrap;
+  transition: opacity 400ms ease;
+  font-family: var(--font-mono);
+}
+.callout[data-visible='false'] {
+  opacity: 0;
+}
+@media (max-width: 767px) {
+  .callout {
+    display: none;
+  }
+}
+.callout-chip {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 12px 6px 6px;
+  border-radius: 10px;
+  background: rgba(12, 14, 17, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.callout-index {
+  display: grid;
+  place-items: center;
+  height: 26px;
+  width: 26px;
+  border-radius: 7px;
+  background: #76b900;
+  color: #0b0f05;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.callout-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.callout-title {
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+.callout-status {
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.5);
+  min-width: 132px;
+}
+.callout-stem {
+  width: 1px;
+  height: 26px;
+  margin-top: 4px;
+  background: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+}

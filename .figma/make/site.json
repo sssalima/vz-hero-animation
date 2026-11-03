@@ -1,0 +1,10 @@
+{
+  "description": "Explore an animated isometric manufacturing assembly line that brings industrial processes to life with detailed 3D objects.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
