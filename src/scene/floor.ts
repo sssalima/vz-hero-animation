@@ -2,7 +2,8 @@ import { CanvasTexture, LinearMipmapLinearFilter, SRGBColorSpace } from "three"
 import { AMR, X_CAP, X_PICK, X_QC, Z_PALLET, Z_ROBOT } from "./timeline"
 
 export const FLOOR = { x0: -18, x1: 16, z0: -9, z1: 8 }
-export const FLOOR_COLOR = "#16181b"
+/** matches the neutral.0 page background token */
+export const FLOOR_COLOR = "#ffffff"
 
 /** Paints the factory floor: grid, aisle lines, cell outlines, keep-out hatching and stencils. */
 export function createFloorTexture(ppm = 72) {
@@ -29,7 +30,9 @@ export function createFloorTexture(ppm = 72) {
     const a = 0.012 + Math.random() * 0.02
     grad.addColorStop(
       0,
-      Math.random() > 0.5 ? `rgba(255,255,255,${a})` : `rgba(0,0,0,${a * 1.6})`,
+      Math.random() > 0.5
+        ? `rgba(255,255,255,${a * 2})`
+        : `rgba(0,0,0,${a * 0.5})`,
     )
     grad.addColorStop(1, "rgba(0,0,0,0)")
     g.fillStyle = grad
@@ -39,25 +42,25 @@ export function createFloorTexture(ppm = 72) {
   // slab joints + grid
   for (let x = Math.ceil(x0); x <= x1; x++) {
     const major = x % 4 === 0
-    g.fillStyle = major ? "rgba(0,0,0,0.35)" : "rgba(255,255,255,0.03)"
+    g.fillStyle = major ? "rgba(0,0,0,0.09)" : "rgba(0,0,0,0.035)"
     g.fillRect(X(x) - (major ? 1.5 : 0.5), 0, major ? 3 : 1, h)
   }
   for (let z = Math.ceil(z0); z <= z1; z++) {
     const major = z % 4 === 0
-    g.fillStyle = major ? "rgba(0,0,0,0.35)" : "rgba(255,255,255,0.03)"
+    g.fillStyle = major ? "rgba(0,0,0,0.09)" : "rgba(0,0,0,0.035)"
     g.fillRect(0, Z(z) - (major ? 1.5 : 0.5), w, major ? 3 : 1)
   }
 
   // AMR aisle
   const aisle0 = AMR.z - 0.75
   const aisle1 = AMR.z + 0.75
-  g.fillStyle = "rgba(255,255,255,0.018)"
+  g.fillStyle = "rgba(0,0,0,0.018)"
   g.fillRect(0, Z(aisle0), w, Z(aisle1) - Z(aisle0))
-  g.fillStyle = "rgba(226,178,24,0.85)"
+  g.fillStyle = "rgba(24,27,31,0.42)"
   g.fillRect(0, Z(aisle0) - M(0.03), w, M(0.06))
   g.fillRect(0, Z(aisle1) - M(0.03), w, M(0.06))
   // flow chevrons (AMR drives toward -x)
-  g.strokeStyle = "rgba(255,255,255,0.07)"
+  g.strokeStyle = "rgba(0,0,0,0.08)"
   g.lineWidth = M(0.05)
   for (let x = x0 + 1; x < x1; x += 3.2) {
     g.beginPath()
@@ -68,7 +71,7 @@ export function createFloorTexture(ppm = 72) {
   }
 
   // back walkway line
-  g.fillStyle = "rgba(226,178,24,0.7)"
+  g.fillStyle = "rgba(24,27,31,0.3)"
   g.fillRect(0, Z(-2.75) - M(0.025), w, M(0.05))
 
   // robot work cells (dashed green outlines)
@@ -78,14 +81,14 @@ export function createFloorTexture(ppm = 72) {
     const za = Z(Z_PALLET - 0.85)
     const zb = Z(0.95)
     g.save()
-    g.strokeStyle = "rgba(118,185,0,0.55)"
+    g.strokeStyle = "rgba(24,27,31,0.32)"
     g.lineWidth = M(0.035)
     g.setLineDash([M(0.22), M(0.14)])
     g.strokeRect(xa, za, xb - xa, zb - za)
     g.restore()
     g.save()
-    g.fillStyle = "rgba(255,255,255,0.13)"
-    g.font = `600 ${M(0.2)}px "Geist Mono", ui-monospace, monospace`
+    g.fillStyle = "rgba(0,0,0,0.2)"
+    g.font = `600 ${M(0.2)}px "Geist Mono Variable", "Geist Mono", ui-monospace, monospace`
     g.textBaseline = "top"
     g.fillText(label, xa + M(0.12), zb - M(0.34))
     g.restore()
@@ -99,9 +102,9 @@ export function createFloorTexture(ppm = 72) {
     g.beginPath()
     g.rect(X(cx - hw), Z(cz - hd), M(hw * 2), M(hd * 2))
     g.clip()
-    g.fillStyle = "rgba(20,20,20,0.9)"
+    g.fillStyle = "rgba(24,27,31,0.06)"
     g.fillRect(X(cx - hw), Z(cz - hd), M(hw * 2), M(hd * 2))
-    g.strokeStyle = "rgba(226,178,24,0.8)"
+    g.strokeStyle = "rgba(24,27,31,0.28)"
     g.lineWidth = M(0.05)
     for (let s = -hw - hd * 2; s < hw + hd * 2; s += 0.14) {
       g.beginPath()
@@ -115,16 +118,16 @@ export function createFloorTexture(ppm = 72) {
   hatch(X_PICK, Z_ROBOT, 0.42, 0.2)
 
   // inspection gate footprint
-  g.fillStyle = "rgba(118,185,0,0.16)"
+  g.fillStyle = "rgba(24,27,31,0.06)"
   g.fillRect(X(X_QC - 0.32), Z(-0.85), M(0.64), M(1.7))
-  g.fillStyle = "rgba(255,255,255,0.13)"
-  g.font = `600 ${M(0.2)}px "Geist Mono", ui-monospace, monospace`
+  g.fillStyle = "rgba(0,0,0,0.2)"
+  g.font = `600 ${M(0.2)}px "Geist Mono Variable", "Geist Mono", ui-monospace, monospace`
   g.fillText("CELL B · VISION QC", X(X_QC - 0.75), Z(0.95) - M(0.14))
 
   // line stencil near the infeed
   g.save()
-  g.fillStyle = "rgba(255,255,255,0.08)"
-  g.font = `700 ${M(0.55)}px "Geist Mono", ui-monospace, monospace`
+  g.fillStyle = "rgba(0,0,0,0.06)"
+  g.font = `700 ${M(0.55)}px "Geist Mono Variable", "Geist Mono", ui-monospace, monospace`
   g.fillText("LINE 03", X(-7.4), Z(1.25))
   g.restore()
 

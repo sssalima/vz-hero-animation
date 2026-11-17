@@ -1,16 +1,87 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap');
+/* self-hosted fonts (Fontsource) */
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/geist-mono';
 @import 'tailwindcss';
 
+/* ThingSpace semantic tokens (see VZ design spec: colors.md), mapped onto shadcn/ui variables */
+:root {
+  --radius: 0.5rem;
+  --background: #ffffff; /* neutral.0 */
+  --foreground: #000000; /* neutral.1000 */
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #ee001e; /* brand.verizon */
+  --primary-active: #cd040b; /* brand.verizon-dark */
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5; /* neutral.100 */
+  --secondary-foreground: #000000;
+  --muted: #f5f5f5;
+  --muted-foreground: #6f7171; /* neutral.600 */
+  --accent: #f5f5f5;
+  --accent-foreground: #000000;
+  --destructive: #b95319; /* semantic.error */
+  --success: #008331; /* semantic.success */
+  --border: #d8dada; /* neutral.300 */
+  --input: #d8dada;
+  --ring: #ee001e;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-active: var(--primary-active);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--signal);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
 @theme {
-  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Geist Mono Variable', 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* ThingSpace neutral scale */
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e8e8e8;
+  --color-neutral-300: #d8dada;
+  --color-neutral-400: #a7a7a7;
+  --color-neutral-500: #8a8a8a;
+  --color-neutral-600: #6f7171;
+  --color-neutral-700: #4a4a4a;
+  --color-neutral-800: #2b2b2b;
+  --color-neutral-900: #1a1a1a;
+  --color-neutral-950: #111111;
+  --color-neutral-1000: #000000;
 }
 
 @layer base {
+  * {
+    border-color: var(--border);
+  }
   html,
   body {
-    background: #0c0e10;
-    color: #fff;
+    background: var(--background);
+    color: var(--foreground);
     -webkit-font-smoothing: antialiased;
   }
 }
@@ -22,13 +93,27 @@
 }
 @media (max-width: 767px) {
   .scene-mask {
-    -webkit-mask-image: radial-gradient(140% 80% at 50% 66%, #000 45%, transparent 86%);
-    mask-image: radial-gradient(140% 80% at 50% 66%, #000 45%, transparent 86%);
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent 0%, #000 18%, #000 80%, transparent 100%),
+      linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to bottom, transparent 0%, #000 18%, #000 80%, transparent 100%),
+      linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+    mask-composite: intersect;
   }
 }
 
-/* station callouts rendered with drei <Html> */
+/* station callouts: DOM cards positioned by the compositor (see src/scene/callouts.tsx) */
+.callout-pin {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform, opacity;
+}
 .callout {
+  transform: translate(-50%, -100%);
+  --signal: var(--success);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,26 +132,63 @@
 .callout-chip {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 6px 12px 6px 6px;
-  border-radius: 10px;
-  background: rgba(12, 14, 17, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  gap: 10px;
+  padding: 7px 12px 7px 8px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  box-shadow:
+    0 1px 2px rgba(15, 20, 25, 0.06),
+    0 10px 28px -8px rgba(15, 20, 25, 0.22);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
-.callout-index {
-  display: grid;
-  place-items: center;
-  height: 26px;
-  width: 26px;
-  border-radius: 7px;
-  background: #76b900;
-  color: #0b0f05;
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+.callout-sim {
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 31px;
+  flex: none;
+  margin-right: 8px;
+}
+.callout-sim img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 3px rgba(15, 20, 25, 0.22));
+  user-select: none;
+}
+/* radio waves leaving the SIM toward the network */
+.callout-waves {
+  position: absolute;
+  top: -11px;
+  right: -12px;
+  width: 22px;
+  height: 22px;
+  overflow: visible;
+}
+.callout-waves path {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 2;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: callout-wave 1.8s ease-out infinite;
+  animation-delay: calc(var(--d, 0s) + var(--i) * 0.18s);
+}
+@keyframes callout-wave {
+  0% {
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 0.18;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 .callout-text {
   display: flex;
@@ -77,17 +199,100 @@
   font-size: 10.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
+  color: var(--foreground);
 }
 .callout-status {
   font-size: 10px;
   letter-spacing: 0.03em;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--muted-foreground);
   min-width: 132px;
 }
+.callout-net {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding-left: 10px;
+  border-left: 1px solid var(--border);
+}
+.callout-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 13px;
+}
+.callout-bars i {
+  width: 3px;
+  border-radius: 1px;
+  background: var(--border);
+  height: calc(4px + var(--i) * 3px);
+}
+.callout-bars i[data-on='true'] {
+  background: var(--signal);
+  animation: callout-bar 1.8s ease-in-out infinite;
+  animation-delay: calc(var(--d, 0s) + var(--i) * 0.12s);
+}
+@keyframes callout-bar {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 0.45;
+  }
+}
+.callout-gen {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--foreground);
+}
 .callout-stem {
+  position: relative;
   width: 1px;
-  height: 26px;
+  height: 30px;
   margin-top: 4px;
-  background: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+  background: linear-gradient(color-mix(in srgb, var(--foreground) 32%, transparent), transparent);
+}
+/* uplink packet travelling from the machine to its SIM */
+.callout-packet {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal) 18%, transparent);
+  animation: callout-packet 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: var(--d, 0s);
+}
+@keyframes callout-packet {
+  0% {
+    transform: translateY(26px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .callout-waves path,
+  .callout-bars i[data-on='true'],
+  .callout-packet {
+    animation: none;
+  }
+  .callout-waves path {
+    opacity: 0.6;
+  }
+  .callout-packet {
+    opacity: 0;
+  }
 }

@@ -1,0 +1,2096 @@
+{
+  "_comment": "Third-party + SimReady models replacing the procedural geometry in the industry scenes. See tools/assets/README.md. `pick` selects the candidate ingested into public/models/<slot>.glb; fetch.mjs fills title/author/license/url from the source metadata.",
+  "slots": {
+    "car_sedan": {
+      "scene": "transportation, infrastructure",
+      "replaces": "vehicles.tsx Car (sedan)",
+      "use": "ghost",
+      "tris": 6000,
+      "size": {
+        "length": 4.8
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "7fd6e15785fa4aa9bfd6e31eb7c97ba6",
+          "title": "Generic sedan 2010 - Low poly model",
+          "author": "Daniel Zhabotinsky",
+          "authorUrl": "https://sketchfab.com/DanielZhabotinsky",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/7fd6e15785fa4aa9bfd6e31eb7c97ba6",
+          "yaw": 180
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "1b3c8d3f862e46608773c50aef1fea7e",
+          "title": "Cadillac CTS 2003 - Low Poly Model",
+          "author": "Daniel Zhabotinsky",
+          "authorUrl": "https://sketchfab.com/DanielZhabotinsky",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/1b3c8d3f862e46608773c50aef1fea7e"
+        }
+      ],
+      "pick": "a",
+      "review": "Same author as the hatch, SUV, box truck and pickups, so traffic reads as one family; b (Cadillac) works as a variant."
+    },
+    "car_hatch": {
+      "scene": "transportation, infrastructure",
+      "replaces": "vehicles.tsx Car (hatch)",
+      "use": "ghost",
+      "tris": 6000,
+      "size": {
+        "length": 4.1
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "055ff8a21b8d4d279debca089e2fafcd",
+          "title": "Modern Hatchback - Low Poly model",
+          "author": "Daniel Zhabotinsky",
+          "authorUrl": "https://sketchfab.com/DanielZhabotinsky",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/055ff8a21b8d4d279debca089e2fafcd",
+          "yaw": 180
+        }
+      ],
+      "pick": "a"
+    },
+    "car_suv": {
+      "scene": "transportation, infrastructure",
+      "replaces": "vehicles.tsx Car (suv)",
+      "use": "ghost",
+      "tris": 6000,
+      "size": {
+        "length": 4.8
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "2866efdfa943484391ef8313768e074d",
+          "title": "Generic SUV - Low poly model",
+          "author": "Daniel Zhabotinsky",
+          "authorUrl": "https://sketchfab.com/DanielZhabotinsky",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/2866efdfa943484391ef8313768e074d",
+          "yaw": 180
+        }
+      ],
+      "pick": "a"
+    },
+    "box_truck": {
+      "scene": "transportation",
+      "replaces": "vehicles.tsx BoxTruck",
+      "use": "hero",
+      "tris": 30000,
+      "size": {
+        "length": 7.8
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "cbc508a5ad424d79b2f2c8a3de7e1cd3",
+          "title": "Light Box Truck - Low poly model",
+          "author": "Daniel Zhabotinsky",
+          "authorUrl": "https://sketchfab.com/DanielZhabotinsky",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/cbc508a5ad424d79b2f2c8a3de7e1cd3"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "656908d5ba1d4754850437966f8f0a14",
+          "title": "Japanese Box Truck (Fictional)",
+          "author": "Calne",
+          "authorUrl": "https://sketchfab.com/Calne",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/656908d5ba1d4754850437966f8f0a14"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "2fd3678f7950470583cdd53b8764be4a",
+          "title": "12' Box Truck Left Side",
+          "author": "wyattprojosh",
+          "authorUrl": "https://sketchfab.com/wyattprojosh",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/2fd3678f7950470583cdd53b8764be4a"
+        }
+      ],
+      "pick": "a",
+      "review": "b is mis-oriented with extra geometry; c is a half model."
+    },
+    "semi_tractor": {
+      "scene": "transportation",
+      "replaces": "vehicles.tsx Semi (tractor unit)",
+      "use": "hero",
+      "tris": 30000,
+      "size": {
+        "length": 6.4
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "5a3d99e5c2bb4a99b0b0e4f4cdfa4384",
+          "title": "Scania",
+          "author": "mauro.zampaoli",
+          "authorUrl": "https://sketchfab.com/mauro.zampaoli",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/5a3d99e5c2bb4a99b0b0e4f4cdfa4384",
+          "size": {
+            "height": 3.9
+          }
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "59889032d0ad457c81d7e058c79eedf8",
+          "title": "Scania truck",
+          "author": "PAndras",
+          "authorUrl": "https://sketchfab.com/PusztaiAndras",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/59889032d0ad457c81d7e058c79eedf8"
+        }
+      ],
+      "pick": "a",
+      "review": "Lighter and cleaner; b is more detailed but dark."
+    },
+    "semi_trailer": {
+      "scene": "transportation",
+      "replaces": "vehicles.tsx Semi (reefer trailer)",
+      "use": "hero",
+      "tris": 12000,
+      "size": {
+        "length": 13.6
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "f507a422e9344e76934c5fbf06eb81d7",
+          "title": "Semi Trailer",
+          "author": "NoblecatSoft",
+          "authorUrl": "https://sketchfab.com/NoblecatSoft",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/f507a422e9344e76934c5fbf06eb81d7",
+          "yaw": 180
+        }
+      ],
+      "pick": "a"
+    },
+    "service_van": {
+      "scene": "transportation",
+      "replaces": "vehicles.tsx Van",
+      "use": "hero",
+      "tris": 25000,
+      "size": {
+        "length": 5.9
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "f69de1315bb049c8946d57f6006acd73",
+          "title": "Mercedes Benz Sprinter 2006",
+          "author": "Max",
+          "authorUrl": "https://sketchfab.com/Max-5532",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/f69de1315bb049c8946d57f6006acd73"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "517a0a6371754860a91292f2be0c2d00",
+          "title": "Tiny Cargo Van (3D Scan)",
+          "author": "Renafox",
+          "authorUrl": "https://sketchfab.com/kryik1023",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/517a0a6371754860a91292f2be0c2d00"
+        }
+      ],
+      "pick": "a",
+      "review": "b is a noisy 3D scan."
+    },
+    "service_pickup": {
+      "scene": "transportation",
+      "replaces": "vehicles.tsx BucketTruck (field-service pickup with ladder + toolbox)",
+      "use": "hero",
+      "tris": 25000,
+      "size": {
+        "length": 5.5
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "6c48c94be8974dc7a5932f697c0ba68f",
+          "title": "Generic 90s light pickup - Low poly model",
+          "author": "Daniel Zhabotinsky",
+          "authorUrl": "https://sketchfab.com/DanielZhabotinsky",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/6c48c94be8974dc7a5932f697c0ba68f",
+          "strip": "rollcage",
+          "materials": [
+            [
+              "^body$",
+              "paint"
+            ]
+          ],
+          "yaw": 180
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "ca1962844c344c048d5dd90d5750a610",
+          "title": "Generic Japan pickup - Low poly model",
+          "author": "Daniel Zhabotinsky",
+          "authorUrl": "https://sketchfab.com/DanielZhabotinsky",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/ca1962844c344c048d5dd90d5750a610",
+          "strip": "rollcage|roll_?bar",
+          "materials": [
+            [
+              "^body$",
+              "paint"
+            ]
+          ]
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "abbc2a083242476d8b29df99af4b0df6",
+          "title": "Chevy Work Truck",
+          "author": "jtressle",
+          "authorUrl": "https://sketchfab.com/jtressle",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/abbc2a083242476d8b29df99af4b0df6",
+          "tris": 25000
+        }
+      ],
+      "pick": "a",
+      "review": "Regular cab + long bed for the ladder rack; roll cage stripped, body mapped to the vehicle paint."
+    },
+    "pickup_ladder": {
+      "scene": "transportation",
+      "replaces": "service pickup accessory",
+      "use": "hero",
+      "tris": 3000,
+      "size": {
+        "length": 4
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "d9d7989ac61848a09eeb60708dc0d941",
+          "title": "Aluminium ladder",
+          "author": "scailman",
+          "authorUrl": "https://sketchfab.com/scailman",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/d9d7989ac61848a09eeb60708dc0d941"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "c07d50441ac84846b8a8150704309b2c",
+          "title": "Extension Ladder",
+          "author": "One80 Solar",
+          "authorUrl": "https://sketchfab.com/one80solar",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/c07d50441ac84846b8a8150704309b2c",
+          "rotate": [
+            [
+              "x",
+              -20.2
+            ]
+          ],
+          "size": {
+            "length": 4.4
+          }
+        }
+      ],
+      "pick": "b",
+      "review": "a is a step ladder."
+    },
+    "pickup_toolbox": {
+      "scene": "transportation",
+      "replaces": "service pickup accessory (cross-bed box)",
+      "use": "hero",
+      "tris": 3000,
+      "size": {
+        "length": 1.7
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "5037b5bea4bf4bd7bf53d581d478bd90",
+          "title": "Industrial Toolbox",
+          "author": "LuddePudde",
+          "authorUrl": "https://sketchfab.com/luddepubde",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/5037b5bea4bf4bd7bf53d581d478bd90"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "37b56969cd1d4ddaa9b152a58f6ed8fa",
+          "title": "Toolbox",
+          "author": "beyondmatter",
+          "authorUrl": "https://sketchfab.com/beyondmatter",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/37b56969cd1d4ddaa9b152a58f6ed8fa"
+        }
+      ],
+      "review": "Neither is a cross-bed truck box: the field-service pickup ships with its ladder rack only."
+    },
+    "guardrail": {
+      "scene": "transportation",
+      "replaces": "Transportation Roadside guard rails",
+      "use": "instanced",
+      "tris": 1500,
+      "size": {
+        "length": 4
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "a3998ee806264420b00c245df7c46f2f",
+          "title": "Guard Rail",
+          "author": "Evan Hiltz",
+          "authorUrl": "https://sketchfab.com/evan.hiltz",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/a3998ee806264420b00c245df7c46f2f",
+          "crop": {
+            "box": [
+              [
+                -1.82,
+                -1,
+                -1
+              ],
+              [
+                1.82,
+                2,
+                1
+              ]
+            ]
+          }
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "0fe3cc82e4534837b025a9d5ac2fcddd",
+          "title": "Guard Rail",
+          "author": "tylerlherring",
+          "authorUrl": "https://sketchfab.com/tylerlherring",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/0fe3cc82e4534837b025a9d5ac2fcddd"
+        }
+      ],
+      "pick": "a",
+      "review": "W-beam rail with its curled terminal ends cropped so 3.64 m pieces run continuously; b is a crowd barrier."
+    },
+    "sign_gantry": {
+      "scene": "transportation",
+      "replaces": "Transportation overhead sign gantry",
+      "use": "ghost",
+      "tris": 8000,
+      "size": {
+        "height": 7.4
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "7209105f6fd64c668928bcdc722fdee6",
+          "title": "French Highway Sign V2 - FAB",
+          "author": "LEFAB",
+          "authorUrl": "https://sketchfab.com/LEFAB",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/7209105f6fd64c668928bcdc722fdee6"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "a56a395419824ba88a3a0490a670253c",
+          "title": "French Highway Sign - FAB  (No text)",
+          "author": "LEFAB",
+          "authorUrl": "https://sketchfab.com/LEFAB",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/a56a395419824ba88a3a0490a670253c"
+        }
+      ],
+      "pick": "b",
+      "review": "Cleaner sign faces (ghosted)."
+    },
+    "tree": {
+      "scene": "transportation, agriculture, infrastructure",
+      "replaces": "icosahedron trees",
+      "use": "instanced",
+      "tris": 6000,
+      "size": {
+        "height": 8
+      },
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "4b27adcf92f644bdabf8ecc6c5bef399",
+          "title": "Maple tree",
+          "author": "atrodler",
+          "authorUrl": "https://sketchfab.com/atrodler",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/4b27adcf92f644bdabf8ecc6c5bef399",
+          "strip": "grass|Groundcover"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "3dc59560f2d24345bdbe65c44636453b",
+          "title": "Oak tree",
+          "author": "massive-graphisme",
+          "authorUrl": "https://sketchfab.com/massive-graphisme",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/3dc59560f2d24345bdbe65c44636453b"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "b562b2e9f029440c804b4b6d36ebe174",
+          "title": "Lowpoly Tree",
+          "author": "dionne",
+          "authorUrl": "https://sketchfab.com/dionne",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/b562b2e9f029440c804b4b6d36ebe174"
+        },
+        {
+          "id": "d",
+          "source": "objaverse",
+          "uid": "e01226b1db02406980307806773fd602",
+          "title": "Birch tree low poly handpainted (game ready)",
+          "author": "Sergi Trojanski",
+          "authorUrl": "https://sketchfab.com/nathramn",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/e01226b1db02406980307806773fd602"
+        },
+        {
+          "id": "e",
+          "source": "objaverse",
+          "uid": "8ffb084d2bfa4cb18f9306865b4a5fd2",
+          "title": "Maple Tree",
+          "author": "FelixBDesign",
+          "authorUrl": "https://sketchfab.com/felix95b",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/8ffb084d2bfa4cb18f9306865b4a5fd2"
+        }
+      ],
+      "pick": "a",
+      "review": "Reads as a tree when ghosted; soil disc stripped. Poly Haven trees (1-2M leaf-card triangles) dropped: they cannot reach the 6k budget."
+    },
+    "street_cabinet": {
+      "scene": "transportation, infrastructure",
+      "replaces": "roadside / signal controller cabinets",
+      "use": "ghost",
+      "tris": 1500,
+      "size": {
+        "height": 1.6
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "e25417f2da1e4308ba4fcd3eda740b33",
+          "title": "Electrical cabinet",
+          "author": "pinokio21",
+          "authorUrl": "https://sketchfab.com/pinokio21",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/e25417f2da1e4308ba4fcd3eda740b33"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "d46594f84bdd4656a21908fc5028f17b",
+          "title": "Old blue electrical cabinet",
+          "author": "3dhdscan",
+          "authorUrl": "https://sketchfab.com/3dhdscan",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/d46594f84bdd4656a21908fc5028f17b"
+        }
+      ],
+      "pick": "a"
+    },
+    "combine": {
+      "scene": "agriculture",
+      "replaces": "vehicles.tsx Combine (reel + unloading auger split as parts)",
+      "use": "hero",
+      "tris": 40000,
+      "size": {
+        "height": 4
+      },
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "9edb72613ddf4a2cafe82cf844824d49",
+          "title": "John Deere CTS Combine",
+          "author": "OwenNielsen",
+          "authorUrl": "https://sketchfab.com/OwenNielsen",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/9edb72613ddf4a2cafe82cf844824d49",
+          "yaw": 90,
+          "materials": [
+            [
+              "Hopper1|Engine1|Panels1|Body1",
+              "light"
+            ],
+            [
+              "Header_and_Ladder1|Feeder_House1|^Hopper$",
+              "mid"
+            ],
+            [
+              "Cab1",
+              "glass"
+            ]
+          ]
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "84b8a341aabc421b8f7268c3a4b173f1",
+          "title": "Low Poly Combine Harvestors",
+          "author": "iedalton",
+          "authorUrl": "https://sketchfab.com/iedalton",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/84b8a341aabc421b8f7268c3a4b173f1"
+        }
+      ],
+      "pick": "a",
+      "review": "Manufacturing-level detail (header, auger, cab). The pickup header has no separable reel, so it stays static; the unloading auger is modelled extended on the left."
+    },
+    "tractor": {
+      "scene": "agriculture",
+      "replaces": "vehicles.tsx Tractor",
+      "use": "hero",
+      "tris": 25000,
+      "size": {
+        "height": 3
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "16d799890d6c499a8762677449b9e179",
+          "title": "Tractor Zetor",
+          "author": "Michael_P",
+          "authorUrl": "https://sketchfab.com/Klooney",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/16d799890d6c499a8762677449b9e179",
+          "texture": "vertex",
+          "brighten": 2.6
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "278fc1e0516c401eba358d3aa2e55635",
+          "title": "Tractor",
+          "author": "le0tard",
+          "authorUrl": "https://sketchfab.com/le0tard",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/278fc1e0516c401eba358d3aa2e55635"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "f09ddded553c4909bc2294b7f340b230",
+          "title": "Tractor",
+          "author": "Ashkelon",
+          "authorUrl": "https://sketchfab.com/Ashkelon",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/f09ddded553c4909bc2294b7f340b230"
+        },
+        {
+          "id": "d",
+          "source": "objaverse",
+          "uid": "e9e844f2f9364044a181ce8f38a83dc3",
+          "title": "Tractor",
+          "author": "sheldon.bean",
+          "authorUrl": "https://sketchfab.com/sheldon.bean",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/e9e844f2f9364044a181ce8f38a83dc3"
+        }
+      ],
+      "pick": "a",
+      "review": "c is a scan with ground; d is similar but darker."
+    },
+    "grain_cart": {
+      "scene": "agriculture",
+      "replaces": "vehicles.tsx GrainCart",
+      "use": "hero",
+      "tris": 20000,
+      "size": {
+        "length": 6.5
+      },
+      "candidates": [
+        {
+          "id": "t",
+          "source": "upload",
+          "file": "grain_cart",
+          "notes": "TurboSquid: no open model found; upload to tools/assets/incoming/upload/",
+          "license": "upload"
+        }
+      ],
+      "review": "No open model and no upload yet: upgraded hand-built cart (ribbed hopper, walking-beam tandem, folding auger)."
+    },
+    "grain_bin": {
+      "scene": "agriculture",
+      "replaces": "Agriculture Silo",
+      "use": "hero",
+      "tris": 15000,
+      "size": {
+        "height": 11
+      },
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "19e8702e23d84c0393fad4cb2115b04d",
+          "title": "Silo",
+          "author": "Johndoh",
+          "authorUrl": "https://sketchfab.com/Johndoh",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/19e8702e23d84c0393fad4cb2115b04d"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "5a63e69b6469487ebee813c9120fe5b7",
+          "title": "Industrial_Silo",
+          "author": "Dhruv",
+          "authorUrl": "https://sketchfab.com/solankidhruv123",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/5a63e69b6469487ebee813c9120fe5b7"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "ef3e7aa9a5254faaa2a612afe0cd92b3",
+          "title": "Silos",
+          "author": "nermin",
+          "authorUrl": "https://sketchfab.com/nermin",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/ef3e7aa9a5254faaa2a612afe0cd92b3",
+          "parts": [
+            {
+              "name": "bin",
+              "box": [
+                [
+                  -3,
+                  -1,
+                  1.95
+                ],
+                [
+                  3,
+                  12,
+                  7
+                ]
+              ],
+              "pivot": "base"
+            }
+          ]
+        }
+      ],
+      "pick": "c",
+      "review": "Corrugated bin pair + elevator leg replaces the three procedural silos; b is the alternative single silo."
+    },
+    "barn": {
+      "scene": "agriculture",
+      "replaces": "Agriculture Barn",
+      "use": "ghost",
+      "tris": 10000,
+      "size": {
+        "height": 9
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "3c4c26894d314c258ebc57862bc6bdb1",
+          "title": "Croft Barn House",
+          "author": "Andrej Grave",
+          "authorUrl": "https://sketchfab.com/andrej.grave",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/3c4c26894d314c258ebc57862bc6bdb1"
+        }
+      ],
+      "pick": "a"
+    },
+    "machine_shed": {
+      "scene": "agriculture",
+      "replaces": "Agriculture Shed",
+      "use": "ghost",
+      "tris": 8000,
+      "size": {
+        "height": 6
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "1266af295e444137b5ba5f80b14b89a1",
+          "title": "L&C Pole Barn",
+          "author": "Deedz",
+          "authorUrl": "https://sketchfab.com/Deedz",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/1266af295e444137b5ba5f80b14b89a1",
+          "strip": "^Object_(8|10|62|64) ",
+          "yaw": -41
+        }
+      ],
+      "pick": "a",
+      "review": "Concrete apron and ground plane stripped; turned square to the axes."
+    },
+    "crop": {
+      "scene": "agriculture",
+      "replaces": "Agriculture Crop cones (instanced; ~1,000 clumps at full detail)",
+      "use": "instanced",
+      "tris": 300,
+      "size": {
+        "height": 1.05
+      },
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "ddff74ac0661414a9478bd4d7581c854",
+          "title": "Wheat — FREE",
+          "author": "Yaroslav Karas",
+          "authorUrl": "https://sketchfab.com/yakaras",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/ddff74ac0661414a9478bd4d7581c854"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "b8bdffd307a64833b2acc986a87f3977",
+          "title": "Yard Wheat Clump",
+          "author": "ebmclachlan",
+          "authorUrl": "https://sketchfab.com/ebmclachlan",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/b8bdffd307a64833b2acc986a87f3977",
+          "tris": 360
+        }
+      ],
+      "pick": "b",
+      "review": "Single wheat clump decimated to 360 triangles for ~1,600 instances; a is a row strip that falls apart when decimated."
+    },
+    "farm_fence": {
+      "scene": "agriculture",
+      "replaces": "Agriculture FieldFence",
+      "use": "instanced",
+      "tris": 800,
+      "size": {
+        "length": 2.6
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "bd8afe2fa6c24d238a761bc4751ebb03",
+          "title": "Wooden Fence",
+          "author": "Shedmon",
+          "authorUrl": "https://sketchfab.com/shedmon",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/bd8afe2fa6c24d238a761bc4751ebb03"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "d1a3b375cbb247d39cab85fea4c17ac8",
+          "title": "Wooden Fence Pack",
+          "author": "Kuutti Siitonen",
+          "authorUrl": "https://sketchfab.com/kuuttisiitonen",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/d1a3b375cbb247d39cab85fea4c17ac8"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "a73260f44d084c9ab06e140a273cd4af",
+          "title": "Simple Wood Fence 2.0",
+          "author": "Blender3D",
+          "authorUrl": "https://sketchfab.com/Blender3D",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/a73260f44d084c9ab06e140a273cd4af"
+        },
+        {
+          "id": "d",
+          "source": "objaverse",
+          "uid": "43f8b3127fba4800bfc3f36078393e87",
+          "title": "Wooden Fence",
+          "author": "DmitriyGDS",
+          "authorUrl": "https://sketchfab.com/DmitriyGDS",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/43f8b3127fba4800bfc3f36078393e87"
+        },
+        {
+          "id": "e",
+          "source": "objaverse",
+          "uid": "8663b19f763f4a358537be148ba082fa",
+          "title": "Wooden Fence",
+          "author": "SamMiller",
+          "authorUrl": "https://sketchfab.com/SamMiller",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/8663b19f763f4a358537be148ba082fa"
+        },
+        {
+          "id": "f",
+          "source": "objaverse",
+          "uid": "792507568a224771bd30b9aba973c23c",
+          "title": "Cartoon Farm Fence",
+          "author": "solajibs",
+          "authorUrl": "https://sketchfab.com/solajibs",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/792507568a224771bd30b9aba973c23c"
+        }
+      ],
+      "pick": "e",
+      "review": "Three-rail post-and-rail field fence."
+    },
+    "weather_station": {
+      "scene": "agriculture",
+      "replaces": "Agriculture WeatherStation (anemometer cups split as a part)",
+      "use": "hero",
+      "tris": 8000,
+      "size": {
+        "height": 4.2
+      },
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "7653ea22fa61410287cea0948c15a4fa",
+          "title": "Weather station",
+          "author": "TRYFIELD",
+          "authorUrl": "https://sketchfab.com/tryfield",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/7653ea22fa61410287cea0948c15a4fa",
+          "strip": "^Plane00[13]",
+          "size": {
+            "height": 1.3
+          },
+          "notes": "Stevenson screen; pair with the weather vane (c) on a mast if no upload"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "b0478f6f72914046a98c74e25b1dd773",
+          "title": "Mini anemometer",
+          "author": "patrakeevasveta",
+          "authorUrl": "https://sketchfab.com/patrakeevasveta",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/b0478f6f72914046a98c74e25b1dd773"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "02ec0b7680524dc088060696e7c0d15b",
+          "size": {
+            "height": 1.2
+          },
+          "title": "Weather vane",
+          "author": "FFeller",
+          "authorUrl": "https://sketchfab.com/FFeller",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/02ec0b7680524dc088060696e7c0d15b"
+        },
+        {
+          "id": "t",
+          "source": "upload",
+          "file": "weather_station",
+          "notes": "TurboSquid alternative",
+          "license": "upload"
+        }
+      ],
+      "review": "No open model reads as an agricultural station (a is broken, b a handheld meter, c a rooster vane): upgraded hand-built mast (vehicles-style palette) until a TurboSquid upload arrives."
+    },
+    "wind_turbine": {
+      "scene": "energy",
+      "replaces": "Energy WindTurbine (rotor split as a part)",
+      "use": "hero",
+      "tris": 30000,
+      "size": {
+        "height": 20
+      },
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "90ad27be20c541d1a0e4818d4e501679",
+          "title": "Generic Wind Turbine (V136 125.5h 145d)",
+          "author": "cesarkero",
+          "authorUrl": "https://sketchfab.com/cesarkero",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/90ad27be20c541d1a0e4818d4e501679"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "c98845dc4d964cbfba316cc761ed0eab",
+          "title": "Wind turbine",
+          "author": "sodazot",
+          "authorUrl": "https://sketchfab.com/sodazot",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/c98845dc4d964cbfba316cc761ed0eab"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "ddfe9c089d6d425f8a83959443bbe062",
+          "title": "Wind Turbine",
+          "author": "Stefifox",
+          "authorUrl": "https://sketchfab.com/Stefifox",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/ddfe9c089d6d425f8a83959443bbe062",
+          "parts": [
+            {
+              "name": "rotor",
+              "box": [
+                [
+                  1.25,
+                  6,
+                  -10
+                ],
+                [
+                  3,
+                  25,
+                  10
+                ]
+              ],
+              "contain": "all",
+              "pivot": [
+                1.45,
+                12.31,
+                -0.465
+              ]
+            }
+          ]
+        }
+      ],
+      "pick": "c",
+      "review": "More geometry than a (2k triangles); rotor to be split as a part. b is broken."
+    },
+    "solar_table": {
+      "scene": "energy",
+      "replaces": "Energy SolarField rows",
+      "use": "hero",
+      "tris": 8000,
+      "size": {
+        "length": 11.6
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "d1b8914c07514268b8d4111fc8de89ca",
+          "title": "Braced Single Post Carport",
+          "author": "One80 Solar",
+          "authorUrl": "https://sketchfab.com/one80solar",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/d1b8914c07514268b8d4111fc8de89ca"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "bb8d20b556a64ba4a8058d165e0ad372",
+          "title": "Full Cantilever T",
+          "author": "One80 Solar",
+          "authorUrl": "https://sketchfab.com/one80solar",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/bb8d20b556a64ba4a8058d165e0ad372"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "e7586533a0534d72b9abd427bd179563",
+          "title": "Photovoltaic Power Plant",
+          "author": "MOJackal",
+          "authorUrl": "https://sketchfab.com/MOJackal",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/e7586533a0534d72b9abd427bd179563"
+        },
+        {
+          "id": "d",
+          "source": "objaverse",
+          "uid": "8f094196d83e43fb9865df4c7501a930",
+          "title": "Solar Panel",
+          "author": "AERO3D",
+          "authorUrl": "https://sketchfab.com/aero3d.ua",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/8f094196d83e43fb9865df4c7501a930",
+          "rotate": [
+            [
+              "x",
+              -42.1
+            ]
+          ],
+          "align": false,
+          "size": {
+            "length": 2
+          }
+        },
+        {
+          "id": "e",
+          "source": "objaverse",
+          "uid": "8ea7bca3c41b4b8286d211ac5156bb55",
+          "title": "Solar Panel",
+          "author": "MrAkitoto",
+          "authorUrl": "https://sketchfab.com/MrAkitoto",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/8ea7bca3c41b4b8286d211ac5156bb55"
+        },
+        {
+          "id": "f",
+          "source": "objaverse",
+          "uid": "f96e524ec3bb4eb4b4b478d59e537a74",
+          "title": "Solar Panel",
+          "author": "lukasakerlind",
+          "authorUrl": "https://sketchfab.com/lukasakerlind",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/f96e524ec3bb4eb4b4b478d59e537a74"
+        },
+        {
+          "id": "g",
+          "source": "objaverse",
+          "uid": "00ffbdc756524e1abf0e9f8f2f49a745",
+          "title": "Solar Panel",
+          "author": "Vadam",
+          "authorUrl": "https://sketchfab.com/Vadam",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/00ffbdc756524e1abf0e9f8f2f49a745"
+        },
+        {
+          "id": "h",
+          "source": "objaverse",
+          "uid": "b132aa68f2614bc1a8bf6aed886427de",
+          "title": "Solar Panel",
+          "author": "LineJansson",
+          "authorUrl": "https://sketchfab.com/LineJansson",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/b132aa68f2614bc1a8bf6aed886427de"
+        }
+      ],
+      "pick": "d",
+      "review": "Real PV module pair laid flat (it ships tilted 42°), tiled along tilted rows on hand-built racking; a/b are carports, c is a miniature plant."
+    },
+    "inverter": {
+      "scene": "energy",
+      "replaces": "Energy InverterSkid",
+      "use": "hero",
+      "tris": 15000,
+      "size": {
+        "height": 2.2
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "e8d19ae2e41645dc9eae55c9f948b34b",
+          "title": "AC Inverter",
+          "author": "vanhalen3d",
+          "authorUrl": "https://sketchfab.com/vanhalen3d",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/e8d19ae2e41645dc9eae55c9f948b34b"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "a721a62c4c404223b420cc5ea3b3cb3b",
+          "title": "Sunny Boy Inverter",
+          "author": "One80 Solar",
+          "authorUrl": "https://sketchfab.com/one80solar",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/a721a62c4c404223b420cc5ea3b3cb3b"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "9c3623c5eda049efad0e005b86bfd163",
+          "title": "Inverter",
+          "author": "One80 Solar",
+          "authorUrl": "https://sketchfab.com/one80solar",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/9c3623c5eda049efad0e005b86bfd163",
+          "texture": "vertex"
+        }
+      ],
+      "pick": "c",
+      "review": "Inverters + disconnects on a unistrut frame, as in a field installation; a is an AC condenser."
+    },
+    "transformer": {
+      "scene": "energy",
+      "replaces": "Energy Transformer",
+      "use": "hero",
+      "tris": 30000,
+      "size": {
+        "height": 4.5
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "3a033547daaa4ec8b7b0426a3ecac987",
+          "title": "Substation Transformer",
+          "author": "HalfCarrot",
+          "authorUrl": "https://sketchfab.com/HalfCarrot",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/3a033547daaa4ec8b7b0426a3ecac987"
+        }
+      ],
+      "pick": "a"
+    },
+    "breaker": {
+      "scene": "energy",
+      "replaces": "Energy Breakers",
+      "use": "ghost",
+      "tris": 8000,
+      "size": {
+        "height": 4.2
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "1cb565a2632e43208179f316c8dfb6bf",
+          "title": "3 Phase Circuit Breaker",
+          "author": "bentalebahmed98",
+          "authorUrl": "https://sketchfab.com/bentalebahmed98",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/1cb565a2632e43208179f316c8dfb6bf"
+        }
+      ],
+      "review": "This is a molded-case breaker, not substation switchgear: TurboSquid upload, or let the substation structure (substation_bay d) carry the HV equipment."
+    },
+    "substation_bay": {
+      "scene": "energy",
+      "replaces": "Energy Gantry + bus work",
+      "use": "ghost",
+      "tris": 10000,
+      "size": {
+        "height": 7
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "6fdbafe7440f435488d0213d4d25c8fc",
+          "title": "Substation",
+          "author": "HalfCarrot",
+          "authorUrl": "https://sketchfab.com/HalfCarrot",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/6fdbafe7440f435488d0213d4d25c8fc"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "8f8020c43a1d4b01bce5f64c58325d4f",
+          "title": "Electrical Substation",
+          "author": "bh03nc",
+          "authorUrl": "https://sketchfab.com/bh03nc",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/8f8020c43a1d4b01bce5f64c58325d4f"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "fd01521490ec4cabba4c89d113fdde23",
+          "title": "Electrical Substation [Drone Scan]",
+          "author": "MrUnity",
+          "authorUrl": "https://sketchfab.com/MrUnityCreations",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/fd01521490ec4cabba4c89d113fdde23"
+        },
+        {
+          "id": "d",
+          "source": "objaverse",
+          "uid": "c2b9bc892734418ab86761a8ec72794e",
+          "tris": 30000,
+          "title": "Sussex Substation - Model - 2020-10-13",
+          "author": "nicolaspapini",
+          "authorUrl": "https://sketchfab.com/nicolaspapini",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/c2b9bc892734418ab86761a8ec72794e"
+        }
+      ],
+      "pick": "d",
+      "review": "Open steel frame for the gantry + bus work."
+    },
+    "control_house": {
+      "scene": "energy",
+      "replaces": "Energy substation control house",
+      "use": "ghost",
+      "tris": 3000,
+      "size": {
+        "length": 4.4
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "0c37b0f92cb54e07a1e1c6c3df9f8439",
+          "title": "Warehouse Building",
+          "author": "OmegaRedZA",
+          "authorUrl": "https://sketchfab.com/OmegaRedZA",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/0c37b0f92cb54e07a1e1c6c3df9f8439"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "316a80fb28c04e14933b8b1b40187c90",
+          "title": "LOW POLY - INDUSTRIAL WAREHOUSE",
+          "author": "Colin.Greenall",
+          "authorUrl": "https://sketchfab.com/Colin.Greenall",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/316a80fb28c04e14933b8b1b40187c90"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "8f8020c43a1d4b01bce5f64c58325d4f",
+          "size": {
+            "height": 3.3
+          },
+          "title": "Electrical Substation",
+          "author": "bh03nc",
+          "authorUrl": "https://sketchfab.com/bh03nc",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/8f8020c43a1d4b01bce5f64c58325d4f"
+        }
+      ],
+      "pick": "c",
+      "review": "Long substation building scaled to 3.3 m."
+    },
+    "bess": {
+      "scene": "energy",
+      "replaces": "Energy BessUnit",
+      "use": "hero",
+      "tris": 15000,
+      "size": {
+        "length": 6.06
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "772f4be391a245f699c54e6cf157c58d",
+          "title": "Classic Shipping Container (Free/Gameready)",
+          "author": "Sebastian Webster",
+          "authorUrl": "https://sketchfab.com/Sebastian.Hamish.Webster",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/772f4be391a245f699c54e6cf157c58d",
+          "materials": [
+            [
+              "BODY",
+              "white"
+            ]
+          ],
+          "crop": {
+            "box": [
+              [
+                -3.2,
+                -1,
+                -1.26
+              ],
+              [
+                2.8,
+                4,
+                1.26
+              ]
+            ]
+          },
+          "notes": "Fallback until the TurboSquid upload: ISO container shell, door end cropped off (closed with a hand-built end wall + HVAC units), tinted white"
+        },
+        {
+          "id": "t",
+          "source": "upload",
+          "file": "bess",
+          "notes": "TurboSquid; fallback is the shipping_container pick with HVAC units",
+          "license": "upload"
+        }
+      ],
+      "review": "No TurboSquid upload yet: the classic ISO container shell with its door end cropped off and tinted white; the scene closes it with an end wall carrying the HVAC units.",
+      "pick": "a"
+    },
+    "metro_car": {
+      "scene": "infrastructure",
+      "replaces": "vehicles.tsx MetroCar",
+      "use": "hero",
+      "tris": 30000,
+      "size": {
+        "length": 15.5
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "564c1e5ef96f4fd2b94142313c2921ea",
+          "title": "New York City Subway car Type-R142",
+          "author": "yarankepang",
+          "authorUrl": "https://sketchfab.com/yarankepang",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/564c1e5ef96f4fd2b94142313c2921ea"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "abc21eee368448a4884376ef1fc444fa",
+          "title": "Subway Car",
+          "author": "james_phan",
+          "authorUrl": "https://sketchfab.com/james_phan",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/abc21eee368448a4884376ef1fc444fa"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "eeccd33aab144e76937c1ebdbc1faa74",
+          "title": "Subway Car (R62A)",
+          "author": "Subin",
+          "authorUrl": "https://sketchfab.com/subink",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/eeccd33aab144e76937c1ebdbc1faa74"
+        }
+      ],
+      "pick": "a",
+      "review": "R142; c (R62A) is an equally good alternative."
+    },
+    "subway_tunnel": {
+      "scene": "infrastructure",
+      "replaces": "Infrastructure Block tunnel lining + rails",
+      "use": "ghost",
+      "tris": 15000,
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "26668039209f41a1a793e0e28ed8589c",
+          "title": "Low Poly Subway Tunnel Section",
+          "author": "TreDè",
+          "authorUrl": "https://sketchfab.com/luigi_disilvestre",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/26668039209f41a1a793e0e28ed8589c"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "46b6647a48c74a05a793875a3baf045a",
+          "title": "metro tube",
+          "author": "nofaced3d",
+          "authorUrl": "https://sketchfab.com/nofaced3d",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/46b6647a48c74a05a793875a3baf045a",
+          "size": {
+            "height": 5.4
+          },
+          "yaw": 90,
+          "crop": {
+            "box": [
+              [
+                -10,
+                -1,
+                -10
+              ],
+              [
+                0.35,
+                10,
+                10
+              ]
+            ]
+          }
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "fd3b202715da41ed8954c9ced44eaded",
+          "title": "Subway Tunnel",
+          "author": "TrolliZBS",
+          "authorUrl": "https://sketchfab.com/TrolliZBS",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/fd3b202715da41ed8954c9ced44eaded"
+        }
+      ],
+      "pick": "b",
+      "review": "Bored tube segment (5.4 m), cropped to its back half for the cut-away and repeated along the line."
+    },
+    "subway_station": {
+      "scene": "infrastructure",
+      "replaces": "Infrastructure Block platform + stairs",
+      "use": "ghost",
+      "tris": 30000,
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "7645920781ba45d68eeff1ab4d053a03",
+          "title": "Low Poly Subway Station Section",
+          "author": "TreDè",
+          "authorUrl": "https://sketchfab.com/luigi_disilvestre",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/7645920781ba45d68eeff1ab4d053a03",
+          "crop": {
+            "box": [
+              [
+                -3.4,
+                -1,
+                -5.2
+              ],
+              [
+                10,
+                10,
+                5.2
+              ]
+            ]
+          }
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "14f5a6534607450d82583e0aa0ed345b",
+          "title": "Metro/Subway Station Interior",
+          "author": "ETBENO",
+          "authorUrl": "https://sketchfab.com/yulaflibiskuvi",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/14f5a6534607450d82583e0aa0ed345b"
+        }
+      ],
+      "pick": "a",
+      "review": "Platform section with track; its end walls and back vault are cropped so sections join into one continuous station that is turned to run the track along the cut face."
+    },
+    "subway_entrance": {
+      "scene": "infrastructure",
+      "replaces": "Infrastructure SubwayEntrance",
+      "use": "ghost",
+      "tris": 8000,
+      "size": {
+        "height": 3.2
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "35c02eee93ea4a2f80af8acb84351d8c",
+          "title": "Subway Entrance  [Street Assets Vol. 01]",
+          "author": "Alt",
+          "authorUrl": "https://sketchfab.com/whisper.alt",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/35c02eee93ea4a2f80af8acb84351d8c",
+          "strip": "Ground|Terfminal",
+          "keepY": true,
+          "size": null,
+          "align": false
+        }
+      ],
+      "pick": "a",
+      "review": "Ground signage slab and ticket terminal stripped; source scale kept with the street at y = 0 (its stairs descend 4.7 m, inside the earth block)."
+    },
+    "traffic_signal": {
+      "scene": "infrastructure",
+      "replaces": "Infrastructure TrafficSignal (lamps stay as live indicator overlays)",
+      "use": "hero",
+      "tris": 15000,
+      "size": {
+        "height": 6.5
+      },
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "f337235e23b74adf8dec003e883e84f6",
+          "title": "McCain 8-Inch Leotek Traffic Signals",
+          "author": "Signalrenders",
+          "authorUrl": "https://sketchfab.com/Signalrenders",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/f337235e23b74adf8dec003e883e84f6"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "64eccd680a254434b329a6a32aaa571f",
+          "title": "8-Inch GE Dr6 Traffic Signals",
+          "author": "Signalrenders",
+          "authorUrl": "https://sketchfab.com/Signalrenders",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/64eccd680a254434b329a6a32aaa571f",
+          "strip": "^Cylinder\\.(299|313)",
+          "size": {
+            "height": 0.85
+          },
+          "materials": [
+            [
+              "8inch",
+              "black"
+            ]
+          ],
+          "parts": [
+            {
+              "name": "red",
+              "match": "8inch red"
+            },
+            {
+              "name": "amber",
+              "match": "8inch amber"
+            },
+            {
+              "name": "green",
+              "match": "8inch green"
+            }
+          ]
+        }
+      ],
+      "pick": "b",
+      "review": "One GE DR6 head kept (the others stripped), lenses split as red / amber / green parts the scene drives; mounted on the SimReady signal arm."
+    },
+    "ev_charger": {
+      "scene": "infrastructure",
+      "replaces": "Infrastructure kerbside EV chargers",
+      "use": "ghost",
+      "tris": 5000,
+      "size": {
+        "height": 1.7
+      },
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "3b2854e4455644638d8ba31d2c9a7287",
+          "title": "Charging Station",
+          "author": "Abdi Nata kusuma",
+          "authorUrl": "https://sketchfab.com/Akusuma",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/3b2854e4455644638d8ba31d2c9a7287"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "61c3ca980aa647559b2247056e6b033d",
+          "title": "HEV Charging Station",
+          "author": "JarpPlay",
+          "authorUrl": "https://sketchfab.com/Jarp_Play",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/61c3ca980aa647559b2247056e6b033d"
+        }
+      ],
+      "pick": "b"
+    },
+    "city_building": {
+      "scene": "infrastructure",
+      "replaces": "Infrastructure Building",
+      "use": "ghost",
+      "tris": 6000,
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "dcf171dca9174000a0fa8d44660253d0",
+          "title": "Low rise wall to wall office building",
+          "author": "aitortilla01",
+          "authorUrl": "https://sketchfab.com/aitortilla01",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/dcf171dca9174000a0fa8d44660253d0",
+          "size": {
+            "height": 10
+          }
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "4d2c3f3450ef4e849056b88b49873ce2",
+          "title": "Mid rise wall to wall office building",
+          "author": "aitortilla01",
+          "authorUrl": "https://sketchfab.com/aitortilla01",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/4d2c3f3450ef4e849056b88b49873ce2",
+          "size": {
+            "height": 10
+          }
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "fbf28e40ff7b409191b2082497f29aeb",
+          "title": "Low rise department store building",
+          "author": "aitortilla01",
+          "authorUrl": "https://sketchfab.com/aitortilla01",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/fbf28e40ff7b409191b2082497f29aeb",
+          "size": {
+            "height": 10
+          }
+        },
+        {
+          "id": "d",
+          "source": "objaverse",
+          "uid": "2dd3bdd5e0724eb1b1025a922fa754cf",
+          "title": "Low rise wall to wall office building",
+          "author": "aitortilla01",
+          "authorUrl": "https://sketchfab.com/aitortilla01",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/2dd3bdd5e0724eb1b1025a922fa754cf",
+          "size": {
+            "height": 10
+          }
+        }
+      ],
+      "pick": "a",
+      "review": "a, with c (city_store) and d (city_office) as the rest of the block (b is too narrow)."
+    },
+    "shipping_container": {
+      "scene": "facilities, energy",
+      "replaces": "Facilities Container (doors split as parts)",
+      "use": "hero",
+      "tris": 15000,
+      "size": {
+        "length": 6.06
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "772f4be391a245f699c54e6cf157c58d",
+          "title": "Classic Shipping Container (Free/Gameready)",
+          "author": "Sebastian Webster",
+          "authorUrl": "https://sketchfab.com/Sebastian.Hamish.Webster",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/772f4be391a245f699c54e6cf157c58d",
+          "materials": [
+            [
+              "BODY",
+              "light"
+            ]
+          ]
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "2b787d1a02174d0bbca9eac34eb3a486",
+          "title": "Freight shipping container - Rusted",
+          "author": "Sousinho",
+          "authorUrl": "https://sketchfab.com/sousinho",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/2b787d1a02174d0bbca9eac34eb3a486"
+        }
+      ],
+      "pick": "a",
+      "review": "Single mesh with one door modelled ajar (matches the \"doors open\" status); body mapped to the light palette tone. Also re-tinted white for the BESS fallback."
+    },
+    "dock_door": {
+      "scene": "facilities",
+      "replaces": "Facilities Building dock doors",
+      "use": "ghost",
+      "tris": 2000,
+      "size": {
+        "length": 3
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "c35bcce819c64079b26bd2f4d1c11096",
+          "title": "Warehouse doors",
+          "author": "tboiston",
+          "authorUrl": "https://sketchfab.com/tboiston",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/c35bcce819c64079b26bd2f4d1c11096"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "61e3d5d35acf4b86b0d521e0e0211dc1",
+          "title": "Desert Facility Roller Shutter Doors",
+          "author": "juleswilcox",
+          "authorUrl": "https://sketchfab.com/juleswilcox",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/61e3d5d35acf4b86b0d521e0e0211dc1"
+        },
+        {
+          "id": "c",
+          "source": "nvidia",
+          "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Structures/Wall_Entrance_A01",
+          "title": "Wall_Entrance_A01",
+          "author": "NVIDIA",
+          "license": "nvidia",
+          "url": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Structures/Wall_Entrance_A01",
+          "usd": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Structures/Wall_Entrance_A01/sm_structure_wall_entrance_a01_01.usd",
+          "size": {
+            "height": 6.5
+          },
+          "align": false
+        }
+      ],
+      "review": "Neither open dock door fits; the SimReady entrance wall module (dock opening, shelter and leveller) is used for the dock bays.",
+      "pick": "c"
+    },
+    "warehouse_wall": {
+      "scene": "facilities",
+      "replaces": "Facilities Building walls",
+      "use": "ghost",
+      "tris": 4000,
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "nvidia",
+          "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Structures/Wall_Straight_A01",
+          "title": "Wall_Straight_A01",
+          "author": "NVIDIA",
+          "license": "nvidia",
+          "url": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Structures/Wall_Straight_A01",
+          "usd": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Structures/Wall_Straight_A01/sm_structure_wall_straight_a01_01.usd",
+          "size": {
+            "height": 6.5
+          }
+        },
+        {
+          "id": "b",
+          "source": "nvidia",
+          "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Structures/Warehouse_H10m_Straight_A04",
+          "title": "Warehouse_H10m_Straight_A04",
+          "author": "NVIDIA",
+          "license": "nvidia",
+          "url": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Structures/Warehouse_H10m_Straight_A04",
+          "usd": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Structures/Warehouse_H10m_Straight_A04/sm_warehouse_h10m_straight_a04_01.usd"
+        },
+        {
+          "id": "c",
+          "source": "nvidia",
+          "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Structures/Wall_Entrance_A01",
+          "title": "Wall_Entrance_A01",
+          "author": "NVIDIA",
+          "license": "nvidia",
+          "url": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Structures/Wall_Entrance_A01",
+          "usd": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Structures/Wall_Entrance_A01/sm_structure_wall_entrance_a01_01.usd"
+        }
+      ],
+      "pick": "a",
+      "review": "a for plain bays (dock bays use dock_door c); scaled to the scene’s 6.5 m wall height."
+    },
+    "stretch_wrapper": {
+      "scene": "facilities",
+      "replaces": "Facilities StretchWrapper (turntable + carriage split as parts)",
+      "use": "hero",
+      "tris": 20000,
+      "size": {
+        "height": 2.6
+      },
+      "candidates": [
+        {
+          "id": "t",
+          "source": "upload",
+          "file": "stretch_wrapper",
+          "notes": "TurboSquid: no open model found",
+          "license": "upload"
+        }
+      ],
+      "review": "No open model and no upload yet: upgraded hand-built turntable wrapper (skirted turntable, mast, carriage with film roll and pre-stretch rollers, pendant, light curtain)."
+    },
+    "nurse_station": {
+      "scene": "healthcare",
+      "replaces": "Healthcare nurse station counter",
+      "use": "ghost",
+      "tris": 4000,
+      "size": {
+        "length": 2.7
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "d23cfdf8128345d7b886ebb9affad2e8",
+          "title": "Reception Desk",
+          "author": "EvieMarie",
+          "authorUrl": "https://sketchfab.com/yvonne.debandi",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/d23cfdf8128345d7b886ebb9affad2e8"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "c1e6580ddcb74d26927470ac59d40787",
+          "title": "Reception Desk 01",
+          "author": "Koho Woo",
+          "authorUrl": "https://sketchfab.com/koksky",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/c1e6580ddcb74d26927470ac59d40787"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "b20d6299f00945e4ab26f3b29ec8a181",
+          "title": "Reception Desk proposal",
+          "author": "sinapersia",
+          "authorUrl": "https://sketchfab.com/sinapersia",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/b20d6299f00945e4ab26f3b29ec8a181"
+        }
+      ],
+      "pick": "c",
+      "review": "a (C-shaped) is the alternative."
+    },
+    "hospital_screen": {
+      "scene": "healthcare",
+      "replaces": "Healthcare low partitions + X-ray control screen",
+      "use": "ghost",
+      "tris": 3000,
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "nvidia",
+          "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Room_and_Furniture/Hospital_Screens",
+          "title": "Hospital_Screens",
+          "author": "NVIDIA",
+          "license": "nvidia",
+          "url": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.2/Isaac/SimReady/Hospital/Room_and_Furniture/Hospital_Screens",
+          "usd": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Room_and_Furniture/Hospital_Screens/Hospital_Screen_A01/payloads/geometries.usd"
+        }
+      ],
+      "pick": "a",
+      "review": "Replaces the low partitions and X-ray control screen."
+    },
+    "bistro_table": {
+      "scene": "retail",
+      "replaces": "Retail dining tables",
+      "use": "ghost",
+      "tris": 1500,
+      "size": {
+        "height": 0.75
+      },
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "0f60f08aeed1473a8456c1e25e7a6593",
+          "title": "(Low) Bistro Table",
+          "author": "Sergey",
+          "authorUrl": "https://sketchfab.com/s.d",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/0f60f08aeed1473a8456c1e25e7a6593"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "fdda635a994f4eb990d8adaec5973873",
+          "title": "Cafe Table",
+          "author": "Kevin Mar",
+          "authorUrl": "https://sketchfab.com/Taiyaki1199",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/fdda635a994f4eb990d8adaec5973873"
+        },
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "9bc2bf35afa044a49b63fc91c7063ac3",
+          "title": "OLD PEDESTAL TABLE",
+          "author": "andree",
+          "authorUrl": "https://sketchfab.com/maestronoov",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/9bc2bf35afa044a49b63fc91c7063ac3"
+        }
+      ],
+      "pick": "c"
+    },
+    "queue_stanchion": {
+      "scene": "retail",
+      "replaces": "Retail queue rail",
+      "use": "ghost",
+      "tris": 1500,
+      "size": {
+        "height": 0.95
+      },
+      "align": false,
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "c045a167102049e4b9c8e9392ea96636",
+          "title": "Bat Stanchion - Low Poly",
+          "author": "pixeldog4ever",
+          "authorUrl": "https://sketchfab.com/pixeldog4ever",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/c045a167102049e4b9c8e9392ea96636"
+        },
+        {
+          "id": "b",
+          "source": "objaverse",
+          "uid": "3cb00ccf0a7e4a6ba6aafcce80810fbe",
+          "title": "Crowd Control Barrier",
+          "author": "Willow Lake Studio",
+          "authorUrl": "https://sketchfab.com/WillowLakeStudio",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/3cb00ccf0a7e4a6ba6aafcce80810fbe"
+        }
+      ],
+      "review": "Neither fits a restaurant queue: the queue rail is dropped."
+    },
+    "food_warmer": {
+      "scene": "retail",
+      "replaces": "Retail PassCounter heat-lamp shelf",
+      "use": "ghost",
+      "tris": 4000,
+      "size": {
+        "length": 3.4
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "c321d257a044422096318def8d1352b2",
+          "title": "cafeteria food warmer",
+          "author": "House Doctor",
+          "authorUrl": "https://sketchfab.com/chin4grci4",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/c321d257a044422096318def8d1352b2"
+        }
+      ],
+      "review": "Too crude: the SimReady pass counter is kept without the heat-lamp shelf."
+    },
+    "walk_in_cooler": {
+      "scene": "retail",
+      "replaces": "Retail WalkIn (door split as a part)",
+      "use": "hero",
+      "tris": 20000,
+      "size": {
+        "height": 2.55
+      },
+      "candidates": [
+        {
+          "id": "a",
+          "source": "objaverse",
+          "uid": "6e04648b2d5840cca36d9816785d7a1f",
+          "title": "Industrial Fridge (Cold Storage Unit)",
+          "author": "JamalBenjamin",
+          "authorUrl": "https://sketchfab.com/JamalBenjamin",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/6e04648b2d5840cca36d9816785d7a1f",
+          "parts": [
+            {
+              "name": "door_l",
+              "box": [
+                [
+                  -0.87,
+                  0.55,
+                  0.3
+                ],
+                [
+                  0.005,
+                  2.32,
+                  0.46
+                ]
+              ],
+              "contain": "all",
+              "pivot": [
+                -0.85,
+                0,
+                0.38
+              ]
+            },
+            {
+              "name": "door_r",
+              "box": [
+                [
+                  -0.005,
+                  0.55,
+                  0.3
+                ],
+                [
+                  0.87,
+                  2.32,
+                  0.46
+                ]
+              ],
+              "contain": "all",
+              "pivot": [
+                0.85,
+                0,
+                0.38
+              ]
+            }
+          ]
+        },
+        {
+          "id": "t",
+          "source": "upload",
+          "file": "walk_in_cooler",
+          "notes": "TurboSquid alternative",
+          "license": "upload"
+        }
+      ],
+      "pick": "a",
+      "review": "No TurboSquid upload yet: a (two-door cold-storage unit) widened to the cooler footprint, doors split as parts."
+    },
+    "city_store": {
+      "scene": "infrastructure",
+      "replaces": "Infrastructure Building (corner block)",
+      "use": "ghost",
+      "tris": 6000,
+      "align": false,
+      "candidates": [
+        {
+          "id": "c",
+          "source": "objaverse",
+          "uid": "fbf28e40ff7b409191b2082497f29aeb",
+          "title": "Low rise department store building",
+          "author": "aitortilla01",
+          "authorUrl": "https://sketchfab.com/aitortilla01",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/fbf28e40ff7b409191b2082497f29aeb",
+          "size": {
+            "height": 10
+          }
+        }
+      ],
+      "pick": "c"
+    },
+    "city_office": {
+      "scene": "infrastructure",
+      "replaces": "Infrastructure Building (south block)",
+      "use": "ghost",
+      "tris": 6000,
+      "align": false,
+      "candidates": [
+        {
+          "id": "d",
+          "source": "objaverse",
+          "uid": "2dd3bdd5e0724eb1b1025a922fa754cf",
+          "title": "Low rise wall to wall office building",
+          "author": "aitortilla01",
+          "authorUrl": "https://sketchfab.com/aitortilla01",
+          "license": "by",
+          "url": "https://sketchfab.com/3d-models/2dd3bdd5e0724eb1b1025a922fa754cf",
+          "size": {
+            "height": 10
+          }
+        }
+      ],
+      "pick": "d"
+    }
+  }
+}

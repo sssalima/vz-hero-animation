@@ -1,0 +1,106 @@
+<!doctype html>
+<!--
+  Contact sheet for converted SimReady GLBs (dev tool, served by Vite):
+    /tools/simready/preview.html?m=forklift_a01,bed_hospital&cols=4
+  Renders each model in greyscale on a white floor with its name, size and triangle count.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SimReady preview</title>
+    <style>
+      html, body { margin: 0; height: 100%; background: #fff; font: 11px ui-monospace, monospace; }
+      canvas { display: block; }
+      .label { position: absolute; transform: translate(-50%, 0); color: #333; white-space: nowrap; text-align: center; }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      import * as THREE from "three"
+      import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
+      import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js"
+
+      const q = new URLSearchParams(location.search)
+      const names = (q.get("m") || "").split(",").filter(Boolean)
+      const cols = Number(q.get("cols") || Math.ceil(Math.sqrt(names.length)))
+      const renderer = new THREE.WebGLRenderer({ antialias: true })
+      renderer.setSize(innerWidth, innerHeight)
+      renderer.shadowMap.enabled = true
+      renderer.toneMapping = THREE.NeutralToneMapping
+      document.body.appendChild(renderer.domElement)
+      const scene = new THREE.Scene()
+      scene.background = new THREE.Color("#ffffff")
+      scene.add(new THREE.HemisphereLight("#ffffff", "#cfd3d8", 1.6))
+      const sun = new THREE.DirectionalLight("#ffffff", 2.4)
+      sun.castShadow = true
+      sun.shadow.mapSize.set(2048, 2048)
+      scene.add(sun, sun.target)
+      const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder)
+      const info = []
+      const cell = Number(q.get("cell") || 0)
+      const loaded = await Promise.all(names.map((n) => loader.loadAsync(`/models/${n}.glb`).catch(() => null)))
+      const sizes = loaded.map((g) => (g ? new THREE.Box3().setFromObject(g.scene).getSize(new THREE.Vector3()) : new THREE.Vector3(1, 1, 1)))
+      const pitch = cell || Math.max(...sizes.map((s) => Math.max(s.x, s.z))) * 1.35 + 0.4
+      loaded.forEach((g, i) => {
+        const x = (i % cols) * pitch
+        const z = Math.floor(i / cols) * pitch
+        if (!g) return info.push({ name: names[i], error: "missing" })
+        let tris = 0
+        g.scene.traverse((o) => {
+          if (o.isMesh) {
+            o.castShadow = o.receiveShadow = true
+            tris += (o.geometry.index ? o.geometry.index.count : o.geometry.attributes.position.count) / 3
+          }
+        })
+        g.scene.position.set(x, 0, z)
+        scene.add(g.scene)
+        if (q.get("axes")) {
+          // +x red, +z blue arrows from each model's origin
+          const ax = new THREE.AxesHelper(Math.max(1, pitch * 0.4))
+          ax.position.set(x, 0.02, z)
+          ax.material.depthTest = false
+          ax.renderOrder = 10
+          scene.add(ax)
+        }
+        const s = sizes[i]
+        info.push({ name: names[i], tris, size: [s.x, s.y, s.z].map((v) => +v.toFixed(2)) })
+        const el = document.createElement("div")
+        el.className = "label"
+        el.textContent = `${names[i]} · ${s.x.toFixed(2)}×${s.y.toFixed(2)}×${s.z.toFixed(2)} m · ${Math.round(tris / 1000)}k`
+        el.dataset.x = x
+        el.dataset.z = z + pitch * 0.42
+        document.body.appendChild(el)
+      })
+      window.__info = info
+      const rows = Math.ceil(names.length / cols)
+      const w = cols * pitch
+      const d = rows * pitch
+      const floor = new THREE.Mesh(new THREE.PlaneGeometry(w + 40, d + 40), new THREE.MeshStandardMaterial({ color: "#ffffff" }))
+      floor.rotation.x = -Math.PI / 2
+      floor.position.set(w / 2 - pitch / 2, 0, d / 2 - pitch / 2)
+      floor.receiveShadow = true
+      scene.add(floor)
+      const center = new THREE.Vector3(w / 2 - pitch / 2, 0, d / 2 - pitch / 2)
+      sun.position.copy(center).add(new THREE.Vector3(-8, 14, 6))
+      sun.target.position.copy(center)
+      const r = Math.max(w, d) * 0.9
+      Object.assign(sun.shadow.camera, { left: -r, right: r, top: r, bottom: -r, far: 80 })
+      sun.shadow.camera.updateProjectionMatrix()
+      const aspect = innerWidth / innerHeight
+      const span = Math.max(w, d) * 0.85
+      const cam = new THREE.OrthographicCamera((-span * aspect) / 2, (span * aspect) / 2, span / 2, -span / 2, 0.1, 400)
+      const az = Math.PI / 4
+      const el = Math.atan(1 / Math.SQRT2)
+      cam.position.copy(center).add(new THREE.Vector3(Math.cos(el) * Math.sin(az), Math.sin(el), Math.cos(el) * Math.cos(az)).multiplyScalar(100))
+      cam.lookAt(center)
+      renderer.render(scene, cam)
+      for (const lab of document.querySelectorAll(".label")) {
+        const p = new THREE.Vector3(+lab.dataset.x, 0, +lab.dataset.z).project(cam)
+        lab.style.left = `${((p.x + 1) / 2) * innerWidth}px`
+        lab.style.top = `${((1 - p.y) / 2) * innerHeight}px`
+      }
+      const grey = q.get("grey") !== "0"
+      if (grey) renderer.domElement.style.filter = "grayscale(1)"
+    </script>
+  </body>
+</html>

@@ -1,0 +1,190 @@
+<!doctype html>
+<!--
+  Contact sheet for sourced model candidates (dev tool, served by Vite):
+    /tools/assets/review.html              every slot
+    /tools/assets/review.html?slot=tree    one slot (also ?scene=energy)
+    &color=1                               skip the greyscale grade the hero applies
+  Each row shows a slot's candidates side by side at real-world scale next to a 1.8 m
+  figure, rendered with the hero's neutral tone mapping and greyscale grade.
+  Build the candidates first: node tools/assets/fetch.mjs && node tools/assets/ingest.mjs --review
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Asset review</title>
+    <style>
+      html, body { margin: 0; background: #fff; color: #1d2125; font: 13px/1.45 ui-sans-serif, system-ui, sans-serif; }
+      main { max-width: 1480px; margin: 0 auto; padding: 28px 32px 80px; }
+      h1 { font-size: 20px; margin: 0 0 4px; }
+      .lede { color: #5b636b; margin: 0 0 28px; }
+      section { border-top: 1px solid #e3e6e9; padding: 22px 0 10px; }
+      header { display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; }
+      h2 { font: 600 15px ui-monospace, monospace; margin: 0; }
+      .meta { color: #5b636b; }
+      .tag { font-size: 11px; padding: 1px 7px; border-radius: 9px; background: #eef0f2; color: #3c444b; }
+      img.sheet { display: block; width: 100%; margin: 12px 0 10px; }
+      .grey img.sheet { filter: grayscale(1); }
+      .cands { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px 18px; }
+      .cand { border-left: 3px solid #d6dade; padding: 2px 0 2px 10px; }
+      .cand b { font-family: ui-monospace, monospace; }
+      .cand small { display: block; color: #5b636b; }
+      .pending { border-left-color: #e2b218; }
+      .picked { border-left-color: #76b900; background: #f6faef; }
+      .err { border-left-color: #c43; }
+      a { color: inherit; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Sourced model candidates</h1>
+      <p class="lede">
+        Candidates for every procedural object in the seven non-Manufacturing scenes, normalised by
+        <code>tools/assets/ingest.mjs</code> (real-world scale, palette materials, triangle budget).
+        Letters match <code>tools/assets/sources.json</code>; the grey figure is 1.8 m.
+      </p>
+      <div id="out"></div>
+    </main>
+    <script type="module">
+      import * as THREE from "three"
+      import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"
+      import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js"
+      import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js"
+
+      const q = new URLSearchParams(location.search)
+      const out = document.getElementById("out")
+      if (!q.get("color")) out.classList.add("grey")
+      const [manifest, index] = await Promise.all([
+        fetch("/tools/assets/sources.json").then((r) => r.json()),
+        fetch("/tools/assets/_review/index.json").then((r) => (r.ok ? r.json() : {})),
+      ])
+      let slots = Object.entries(manifest.slots)
+      if (q.get("slot")) slots = slots.filter(([s]) => q.get("slot").split(",").includes(s))
+      if (q.get("scene")) slots = slots.filter(([, d]) => d.scene.includes(q.get("scene")))
+
+      const W = 1400
+      const H = 520
+      const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
+      renderer.setPixelRatio(1)
+      renderer.setSize(W, H)
+      renderer.shadowMap.enabled = true
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap
+      renderer.toneMapping = THREE.NeutralToneMapping
+      const pmrem = new THREE.PMREMGenerator(renderer)
+      const env = pmrem.fromScene(new RoomEnvironment(), 0.04).texture
+      const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder)
+      const figure = new THREE.Mesh(new THREE.CapsuleGeometry(0.22, 1.36, 4, 12), new THREE.MeshStandardMaterial({ color: "#b9bfc5", roughness: 0.6 }))
+      figure.position.y = 0.9
+
+      for (const [slot, def] of slots) {
+        const sec = document.createElement("section")
+        sec.innerHTML = `<header><h2>${slot}</h2><span class="tag">${def.use}</span><span class="meta">${def.scene} · replaces ${def.replaces} · budget ${def.tris.toLocaleString()} tris${def.pick ? ` · <b>pick: ${def.pick}</b>` : " · <b>no pick</b>"}</span></header>${def.review ? `<p class="meta" style="margin:6px 0 0">${def.review}</p>` : ""}`
+        out.appendChild(sec)
+        const scene = new THREE.Scene()
+        scene.background = new THREE.Color("#ffffff")
+        scene.environment = env
+        scene.environmentIntensity = 0.55
+        scene.add(new THREE.HemisphereLight("#ffffff", "#d5d9dd", 1.1))
+        const sun = new THREE.DirectionalLight("#ffffff", 2.6)
+        sun.castShadow = true
+        sun.shadow.mapSize.set(4096, 4096)
+        sun.shadow.bias = -0.0004
+        scene.add(sun, sun.target)
+        const list = def.candidates.map((c) => ({ c, e: index[`${slot}.${c.id}`] }))
+        const loaded = await Promise.all(list.map(({ e }) => (e?.status === "ok" ? loader.loadAsync(`/${e.file}?v=${e.bytes}`).catch(() => null) : null)))
+        let x = 0
+        let maxH = 1.8
+        let maxD = 1
+        const labels = []
+        const fig = figure.clone()
+        fig.position.x = -1.2
+        scene.add(fig)
+        loaded.forEach((g, i) => {
+          if (!g) return
+          const box = new THREE.Box3().setFromObject(g.scene)
+          const s = box.getSize(new THREE.Vector3())
+          g.scene.traverse((o) => {
+            if (o.isMesh) {
+              o.castShadow = o.receiveShadow = true
+              if (o.material) o.material.envMapIntensity = 0.9
+            }
+          })
+          g.scene.position.x = x - box.min.x
+          scene.add(g.scene)
+          labels.push({ i, x: x + s.x / 2, top: s.y })
+          x += s.x + Math.max(1.2, 0.18 * Math.max(s.x, s.z))
+          maxH = Math.max(maxH, s.y)
+          maxD = Math.max(maxD, s.z)
+        })
+        const floor = new THREE.Mesh(new THREE.PlaneGeometry(1000, 1000), new THREE.MeshStandardMaterial({ color: "#ffffff", roughness: 0.95 }))
+        floor.rotation.x = -Math.PI / 2
+        floor.receiveShadow = true
+        scene.add(floor)
+        const grid = new THREE.GridHelper(400, 400, "#e6e8ea", "#f0f1f2")
+        grid.position.y = 0.002
+        scene.add(grid)
+        const span = Math.max(4, x + 1.2)
+        const cx = span / 2 - 1.4
+        const bb = new THREE.Box3(new THREE.Vector3(-1.6, 0, -maxD / 2), new THREE.Vector3(x, maxH, maxD / 2))
+        const cam = new THREE.OrthographicCamera(-1, 1, 1, -1, -500, 500)
+        const dir = new THREE.Vector3(0.62, 0.55, 1).normalize()
+        cam.position.copy(new THREE.Vector3(cx, maxH * 0.4, 0)).addScaledVector(dir, 100)
+        cam.lookAt(cx, maxH * 0.4, 0)
+        cam.updateMatrixWorld()
+        // fit the ortho frustum to the projected bounds
+        const pts = []
+        for (const px of [bb.min.x, bb.max.x]) for (const py of [bb.min.y, bb.max.y]) for (const pz of [bb.min.z, bb.max.z]) pts.push(new THREE.Vector3(px, py, pz).applyMatrix4(cam.matrixWorldInverse))
+        const minX = Math.min(...pts.map((p) => p.x)), maxX = Math.max(...pts.map((p) => p.x))
+        const minY = Math.min(...pts.map((p) => p.y)), maxY = Math.max(...pts.map((p) => p.y))
+        const pad = 1.08
+        let hw = ((maxX - minX) / 2) * pad
+        let hh = ((maxY - minY) / 2) * pad
+        if (hw / hh > W / H) hh = hw / (W / H)
+        else hw = hh * (W / H)
+        const ox = (minX + maxX) / 2
+        const oy = (minY + maxY) / 2
+        Object.assign(cam, { left: ox - hw, right: ox + hw, top: oy + hh, bottom: oy - hh })
+        cam.updateProjectionMatrix()
+        sun.position.set(cx - span * 0.3, maxH * 3 + 10, span * 0.6 + 10)
+        sun.target.position.set(cx, 0, 0)
+        const r = Math.max(span, maxD) * 0.75 + maxH
+        Object.assign(sun.shadow.camera, { left: -r, right: r, top: r, bottom: -r, near: 0.1, far: 400 })
+        sun.shadow.camera.updateProjectionMatrix()
+        renderer.render(scene, cam)
+        const img = document.createElement("img")
+        img.className = "sheet"
+        img.src = renderer.domElement.toDataURL("image/png")
+        await img.decode()
+        // letter tags over each model
+        const wrap = document.createElement("div")
+        wrap.style.position = "relative"
+        wrap.appendChild(img)
+        sec.appendChild(wrap)
+        for (const l of labels) {
+          const p = new THREE.Vector3(l.x, l.top, 0).project(cam)
+          const t = document.createElement("div")
+          t.textContent = list[l.i].c.id
+          t.style.cssText = `position:absolute;left:${((p.x + 1) / 2) * 100}%;top:${((1 - p.y) / 2) * 100}%;transform:translate(-50%,-140%);font:600 13px ui-monospace,monospace;background:#1d2125;color:#fff;border-radius:3px;padding:0 6px`
+          wrap.appendChild(t)
+        }
+        const cands = document.createElement("div")
+        cands.className = "cands"
+        for (const { c, e } of list) {
+          const d = document.createElement("div")
+          const ok = e?.status === "ok"
+          d.className = `cand ${ok ? "" : e?.status?.startsWith("error") ? "err" : "pending"} ${def.pick === c.id ? "picked" : ""}`
+          const lic = { by: "CC-BY 4.0", cc0: "CC0", nvidia: "NVIDIA SimReady", upload: "TurboSquid upload" }[c.license ?? c.source] ?? c.license ?? c.source
+          d.innerHTML =
+            `<b>${c.id}</b> ${c.url ? `<a href="${c.url}" target="_blank" rel="noreferrer">${c.title ?? c.uid ?? c.asset ?? c.file}</a>` : (c.title ?? c.file ?? c.src)}` +
+            `<small>${c.author ? `${c.author} · ` : ""}${lic}</small>` +
+            (ok ? `<small>${e.tris.toLocaleString()} tris (from ${e.srcTris.toLocaleString()}) · ${e.size.join(" × ")} m · ${(e.bytes / 1024).toFixed(0)} KB</small>` : `<small>${e?.status ?? "not ingested"}</small>`) +
+            (ok && e.notes.length ? `<small>${e.notes.join(" · ")}</small>` : "") +
+            (c.notes ? `<small>${c.notes}</small>` : "")
+          cands.appendChild(d)
+        }
+        sec.appendChild(cands)
+        scene.traverse((o) => o.geometry?.dispose?.())
+      }
+      window.__done = true
+    </script>
+  </body>
+</html>

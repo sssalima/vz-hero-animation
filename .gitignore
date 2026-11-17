@@ -19,3 +19,10 @@ logs/
 # beside it.
 /.plugins/
 /.opencode-skills/
+
+# dev-only tool dependencies (tools/assets/package.json, python wheels for tools/simready)
+tools/**/node_modules
+tools/.pydeps/
+# asset pipeline scratch: user-supplied raw files, review candidates
+tools/assets/incoming/
+tools/assets/_review/

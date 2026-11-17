@@ -1,50 +1,15 @@
+import { useMemo, useRef } from "react"
 import {
-  Environment,
-  Html,
-  Lightformer,
-  OrthographicCamera,
-  PerformanceMonitor,
-} from "@react-three/drei"
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import {
-  Bloom,
-  EffectComposer,
-  N8AO,
-  ToneMapping,
-} from "@react-three/postprocessing"
-import { ToneMappingMode } from "postprocessing"
-import {
-  createContext,
-  Suspense,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type ReactNode,
-  type RefObject,
-} from "react"
-import {
-  AdditiveBlending,
   Color,
-  DirectionalLight,
   Group,
   Mesh,
   MeshBasicMaterial,
   MeshStandardMaterial,
-  Object3D,
-  OrthographicCamera as OrthoCam,
-  Vector3,
 } from "three"
-import { getControls, lineClock, useControls } from "./clock"
-import { createFloorTexture, FLOOR, FLOOR_COLOR } from "./floor"
-import {
-  preloadModels,
-  useClone,
-  useClones,
-  useModel,
-  type ModelKey,
-} from "./models"
+import { Anchor, type CalloutDef } from "../callouts"
+import { BaseFloor, Faded, Prop, useSceneFrame } from "../common"
+import { createFloorTexture, FLOOR } from "../floor"
+import { useClone, useClones, useModel, type ModelKey } from "../models"
 import {
   AMR,
   amrX,
@@ -85,11 +50,14 @@ import {
   X_QC,
   Z_PALLET,
   Z_ROBOT,
-} from "./timeline"
-import { applyUR10, getUR10Rig, solveToolDown, type JointAngles } from "./ur10"
+} from "../timeline"
+import { applyUR10, getUR10Rig, solveToolDown, type JointAngles } from "../ur10"
+import type { SceneDef } from "."
 
-preloadModels()
-
+/**
+ * Manufacturing: a pail capping, vision QC and palletizing line. The UR10 cells, the QC
+ * gate and the AMR carry SIMs; conveyors, product and set dressing are ghosted.
+ */
 const GREEN = new Color("#76b900")
 const R1_BASE = { x: X_CAP, y: PED_H, z: Z_ROBOT }
 const R2_BASE = { x: X_PICK, y: PED_H, z: Z_ROBOT }
@@ -107,143 +75,7 @@ const r2Target = (t: number, out: V3) => {
   return samplePath(R2_PATHS[slotOf(pail)], phase, R2_BASE, out)
 }
 
-// ------------------------------------------------------------------ clock + camera
-
-function ClockDriver() {
-  useFrame((_, dt) => {
-    if (!getControls().paused)
-      lineClock.t += Math.min(dt, 0.1) * lineClock.speed
-  }, -10)
-  return null
-}
-
-const ISO_AZIMUTH = Math.PI / 4
-const ISO_ELEVATION = Math.atan(1 / Math.SQRT2) // true isometric (35.26 deg)
-const SCENE_CENTER = new Vector3(0.2, 0.9, -0.9)
-
-function IsoCamera() {
-  const cam = useRef<OrthoCam>(null)
-  const size = useThree((s) => s.size)
-  const pointer = useRef({ x: 0, y: 0, sx: 0, sy: 0 })
-  useEffect(() => {
-    const onMove = (e: PointerEvent) => {
-      pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1
-      pointer.current.y = (e.clientY / window.innerHeight) * 2 - 1
-    }
-    window.addEventListener("pointermove", onMove)
-    return () => window.removeEventListener("pointermove", onMove)
-  }, [])
-  const tmp = useMemo(
-    () => ({ right: new Vector3(), up: new Vector3(), target: new Vector3() }),
-    [],
-  )
-  useFrame((_, dt) => {
-    const c = cam.current
-    if (!c) return
-    const p = pointer.current
-    const k = 1 - Math.exp(-dt * 2.5)
-    p.sx += (p.x - p.sx) * k
-    p.sy += (p.y - p.sy) * k
-    const az = ISO_AZIMUTH + p.sx * 0.035
-    const el = ISO_ELEVATION - p.sy * 0.02
-    const wide = size.width / size.height > 1.15
-    // world units visible across the viewport
-    const span = wide ? Math.max(10.8, 15.5 * (size.height / size.width)) : 6.8
-    const zoom = Math.max(size.width, 320) / span
-    c.zoom = zoom
-    const dir = new Vector3(
-      Math.cos(el) * Math.sin(az),
-      Math.sin(el),
-      Math.cos(el) * Math.cos(az),
-    )
-    tmp.right.set(Math.cos(az), 0, -Math.sin(az))
-    tmp.up.crossVectors(dir, tmp.right).normalize().negate()
-    // push the line to the right of the headline on wide screens, below it on tall ones
-    const ox = wide ? -(size.width * 0.14) / zoom : 0
-    // tmp.up points down-screen, so negative offsets lower the scene
-    const oy = wide
-      ? (size.height * -0.025) / zoom
-      : (size.height * -0.16) / zoom
-    tmp.target
-      .copy(SCENE_CENTER)
-      .addScaledVector(tmp.right, ox)
-      .addScaledVector(tmp.up, oy)
-    c.position.copy(tmp.target).addScaledVector(dir, 40)
-    c.up.set(0, 1, 0)
-    c.lookAt(tmp.target)
-    c.updateProjectionMatrix()
-  })
-  return <OrthographicCamera ref={cam} makeDefault near={0.1} far={120} />
-}
-
-// ------------------------------------------------------------------ environment
-
-function Lights() {
-  const key = useRef<DirectionalLight>(null)
-  const target = useMemo(() => new Object3D(), [])
-  useEffect(() => {
-    if (key.current) key.current.target = target
-  }, [target])
-  return (
-    <>
-      <hemisphereLight args={["#d9e4ff", "#1b1e22", 0.55]} />
-      <directionalLight
-        ref={key}
-        position={[-6.5, 13, 5.5]}
-        intensity={2.6}
-        color="#fff4e6"
-        castShadow
-        shadow-mapSize={[2048, 2048]}
-        shadow-bias={-0.0003}
-        shadow-normalBias={0.025}
-        shadow-camera-left={-13}
-        shadow-camera-right={13}
-        shadow-camera-top={11}
-        shadow-camera-bottom={-11}
-        shadow-camera-near={1}
-        shadow-camera-far={40}
-      />
-      <primitive object={target} position={[0.5, 0, -1]} />
-      <directionalLight
-        position={[9, 6, 10]}
-        intensity={0.55}
-        color="#bcd3ff"
-      />
-      <Environment resolution={256} frames={1}>
-        <Lightformer
-          form="rect"
-          intensity={2.4}
-          position={[0, 9, 0]}
-          rotation-x={Math.PI / 2}
-          scale={[26, 6, 1]}
-        />
-        <Lightformer
-          form="rect"
-          intensity={1.4}
-          position={[-10, 5, 4]}
-          rotation-y={Math.PI / 2.4}
-          scale={[12, 3, 1]}
-        />
-        <Lightformer
-          form="rect"
-          intensity={0.9}
-          position={[10, 4, 8]}
-          rotation-y={-Math.PI / 1.6}
-          scale={[10, 2.5, 1]}
-        />
-        <Lightformer
-          form="ring"
-          color="#9be22d"
-          intensity={0.8}
-          position={[0, 3, -10]}
-          scale={4}
-        />
-      </Environment>
-    </>
-  )
-}
-
-function Floor() {
+function FactoryFloor() {
   const tex = useMemo(() => createFloorTexture(), [])
   const w = FLOOR.x1 - FLOOR.x0
   const d = FLOOR.z1 - FLOOR.z0
@@ -257,40 +89,13 @@ function Floor() {
         <planeGeometry args={[w, d]} />
         <meshStandardMaterial
           map={tex}
-          roughness={0.78}
+          roughness={0.9}
           metalness={0}
-          envMapIntensity={0.35}
+          envMapIntensity={0.25}
         />
       </mesh>
-      <mesh rotation-x={-Math.PI / 2} position-y={-0.003} receiveShadow>
-        <planeGeometry args={[220, 220]} />
-        <meshStandardMaterial
-          color={FLOOR_COLOR}
-          roughness={0.85}
-          envMapIntensity={0.3}
-        />
-      </mesh>
+      <BaseFloor />
     </group>
-  )
-}
-
-// ------------------------------------------------------------------ static assets
-
-type PropProps = {
-  model: ModelKey
-  position: [number, number, number]
-  rotation?: number
-  scale?: number
-}
-function Prop({ model, position, rotation = 0, scale = 1 }: PropProps) {
-  const obj = useClone(model)
-  return (
-    <primitive
-      object={obj}
-      position={position}
-      rotation-y={rotation}
-      scale={scale}
-    />
   )
 }
 
@@ -321,30 +126,30 @@ function Conveyors() {
 }
 
 const steel = new MeshStandardMaterial({
-  color: "#2b3036",
-  roughness: 0.42,
-  metalness: 0.75,
+  color: "#7d858d",
+  roughness: 0.4,
+  metalness: 0.55,
 })
 const aluminium = new MeshStandardMaterial({
-  color: "#c4cad0",
+  color: "#8f979f",
   roughness: 0.34,
   metalness: 0.45,
 })
 const panel = new MeshStandardMaterial({
-  color: "#3a4249",
-  roughness: 0.5,
-  metalness: 0.35,
+  color: "#d4d8dc",
+  roughness: 0.55,
+  metalness: 0.05,
 })
-const hazard = new MeshStandardMaterial({ color: "#1a1a1a", roughness: 0.6 })
+const hazard = new MeshStandardMaterial({ color: "#3a3f45", roughness: 0.6 })
 const anodized = new MeshStandardMaterial({
-  color: "#1d2126",
-  roughness: 0.38,
-  metalness: 0.6,
+  color: "#5a6168",
+  roughness: 0.4,
+  metalness: 0.45,
 })
 const steelLight = new MeshStandardMaterial({
-  color: "#4a525b",
+  color: "#9aa1a8",
   roughness: 0.35,
-  metalness: 0.8,
+  metalness: 0.55,
 })
 const safetyYellow = new MeshStandardMaterial({
   color: "#e2b218",
@@ -411,8 +216,8 @@ function Robot({
     }),
     [],
   )
-  useFrame(() => {
-    target(lineClock.t, state.p)
+  useSceneFrame((t) => {
+    target(t, state.p)
     state.local.x = state.p.x - base.x
     state.local.y = state.p.y - base.y
     state.local.z = state.p.z - base.z
@@ -439,8 +244,7 @@ function LidMagazine() {
   )
   const groups = useRef<(Group | null)[]>([])
   const tmp = useMemo(() => ({ x: 0, y: 0, z: 0 }), [])
-  useFrame(() => {
-    const t = lineClock.t
+  useSceneFrame((t) => {
     const { picked, rise } = magazineState(t)
     const n = lids.length
     const ref = picked + MAG_VISIBLE - 1
@@ -500,11 +304,13 @@ function LidMagazine() {
           </mesh>
         )
       })}
-      {lids.map((lid, p) => (
-        <group key={p} ref={(g) => void (groups.current[p] = g)}>
-          <primitive object={lid} />
-        </group>
-      ))}
+      <Faded>
+        {lids.map((lid, p) => (
+          <group key={p} ref={(g) => void (groups.current[p] = g)}>
+            <primitive object={lid} />
+          </group>
+        ))}
+      </Faded>
     </group>
   )
 }
@@ -518,10 +324,9 @@ function QCGate() {
   const sheetMat = useMemo(
     () =>
       new MeshBasicMaterial({
-        color: GREEN.clone().multiplyScalar(2.2),
+        color: "#20262c",
         transparent: true,
         opacity: 0.0,
-        blending: AdditiveBlending,
         depthWrite: false,
         toneMapped: false,
       }),
@@ -529,8 +334,7 @@ function QCGate() {
   )
   const passColor = useMemo(() => GREEN.clone().multiplyScalar(4), [])
   const scanColor = useMemo(() => new Color("#ffb020").multiplyScalar(3), [])
-  useFrame(() => {
-    const t = lineClock.t
+  useSceneFrame((t) => {
     const tau = mod(t, CYCLE)
     const scanning = tau > MOVE + 0.15 && tau < CYCLE - 0.55
     const s = (tau - MOVE - 0.15) / (CYCLE - 0.7 - MOVE)
@@ -542,7 +346,7 @@ function QCGate() {
         (PAIL_H + 0.04) * (0.5 - 0.5 * Math.cos(Math.PI * 2 * s))
       sheet.current.position.y = y
       sheetMat.opacity = scanning
-        ? 0.5 * Math.sin(Math.PI * Math.min(1, Math.max(0, s))) + 0.08
+        ? 0.22 * Math.sin(Math.PI * Math.min(1, Math.max(0, s))) + 0.04
         : 0
     }
     if (lamp.current) lamp.current.color.copy(scanning ? scanColor : passColor)
@@ -611,8 +415,8 @@ function PalletDispenser() {
   const len = DISP_X1 - DISP_X0
   const cx = (DISP_X0 + DISP_X1) / 2
   const led = useRef<MeshBasicMaterial>(null)
-  useFrame(() => {
-    const pp = palletProgress(lineClock.t)
+  useSceneFrame((t) => {
+    const pp = palletProgress(t)
     const moving = pp - Math.floor(pp) > 0 && pp - Math.floor(pp) < 0.999
     if (led.current)
       led.current.color.copy(GREEN).multiplyScalar(moving ? 3.6 : 1.8)
@@ -725,8 +529,7 @@ function Pails() {
   )
   const groups = useRef<(Group | null)[]>([])
   const tmp = useMemo(() => ({ x: 0, y: 0, z: 0 }), [])
-  useFrame(() => {
-    const t = lineClock.t
+  useSceneFrame((t) => {
     const c = Math.floor(t / CYCLE)
     const pp = palletProgress(t)
     for (let p = 0; p < PAIL_POOL; p++) {
@@ -769,8 +572,7 @@ function Pails() {
 function Pallets() {
   const clones = useClones("pallet", PALLET_POOL)
   const groups = useRef<(Group | null)[]>([])
-  useFrame(() => {
-    const t = lineClock.t
+  useSceneFrame((t) => {
     const pp = palletProgress(t)
     const ref = Math.floor(pp) - PALLET_OFFSET_MIN
     for (let p = 0; p < PALLET_POOL; p++) {
@@ -804,8 +606,8 @@ type AMRUnitProps = {
 
 function AMRUnit({ offset, payload }: AMRUnitProps) {
   const ref = useRef<Group>(null)
-  useFrame(() => {
-    if (ref.current) ref.current.position.x = amrX(lineClock.t, offset)
+  useSceneFrame((t) => {
+    if (ref.current) ref.current.position.x = amrX(t, offset)
   })
   return (
     <group ref={ref} position={[0, 0, AMR.z]}>
@@ -841,8 +643,12 @@ function SetDressing() {
       <Prop model="bulkBox" position={[-4.35, 0, -3.95]} />
       {/* drums */}
       <Prop model="exportPallet" position={[-1.45, 0, -3.95]} />
-      <Prop model="steelDrum" position={[-1.77, 0.144, -3.95]} />
-      <Prop model="steelDrum" position={[-1.12, 0.144, -3.95]} rotation={1.1} />
+      <Prop model="plasticDrum" position={[-1.77, 0.144, -3.95]} />
+      <Prop
+        model="plasticDrum"
+        position={[-1.12, 0.144, -3.95]}
+        rotation={1.1}
+      />
       <Prop model="fiberDrum" position={[-0.2, 0, -3.85]} />
       {/* finished goods */}
       <Prop
@@ -885,67 +691,7 @@ function SetDressing() {
   )
 }
 
-// ------------------------------------------------------------------ station callouts
-
-const LabelLayer = createContext<RefObject<HTMLDivElement | null> | null>(null)
-
-function Callout({
-  position,
-  index,
-  title,
-  children,
-}: {
-  position: [number, number, number]
-  index: string
-  title: string
-  children?: ReactNode
-}) {
-  const { labels } = useControls()
-  const layer = useContext(LabelLayer)
-  return (
-    <Html
-      position={position}
-      zIndexRange={[20, 0]}
-      portal={layer as RefObject<HTMLElement> | undefined}
-      style={{ pointerEvents: "none" }}
-    >
-      <div
-        className="callout"
-        data-visible={labels}
-        style={{ transform: "translate(-50%, -100%)" }}
-      >
-        <div className="callout-chip">
-          <span className="callout-index">{index}</span>
-          <span className="callout-text">
-            <span className="callout-title">{title}</span>
-            <span className="callout-status">{children}</span>
-          </span>
-        </div>
-        <div className="callout-stem" />
-      </div>
-    </Html>
-  )
-}
-
-/** Html children render in their own React root, so poll the clock with rAF instead of useFrame. */
-function LiveText({ read }: { read: (t: number) => string }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  useEffect(() => {
-    let raf = 0
-    let last = ""
-    const tick = () => {
-      const s = read(lineClock.t)
-      if (s !== last && ref.current) {
-        ref.current.textContent = s
-        last = s
-      }
-      raf = requestAnimationFrame(tick)
-    }
-    tick()
-    return () => cancelAnimationFrame(raf)
-  }, [read])
-  return <span ref={ref} />
-}
+// ------------------------------------------------------------------ callouts
 
 function capStatus(t: number) {
   const tau = mod(t, CYCLE)
@@ -976,120 +722,54 @@ function amrStatus() {
   return "Idealworks iw.hub · AMR"
 }
 
-function MovingCallout() {
+function MovingAnchor() {
   const ref = useRef<Group>(null)
-  useFrame(() => {
-    if (ref.current) ref.current.position.x = amrX(lineClock.t, 0) - 0.3
+  useSceneFrame((t) => {
+    if (ref.current) ref.current.position.x = amrX(t, 0) - 0.3
   })
   return (
     <group ref={ref} position={[0, 0, AMR.z]}>
-      <Callout position={[0, 0.72, 0]} index="04" title="Intralogistics">
-        <LiveText read={amrStatus} />
-      </Callout>
+      <Anchor id="mfg-amr" position={[0, 0.72, 0]} />
     </group>
   )
 }
 
-function Callouts() {
+function Manufacturing() {
   return (
-    <>
-      <Callout
-        position={[X_CAP - 0.25, 2.1, Z_ROBOT]}
-        index="01"
-        title="Capping"
-      >
-        <LiveText read={capStatus} />
-      </Callout>
-      <Callout position={[X_QC, 2.3, 0]} index="02" title="Vision QC">
-        <LiveText read={qcStatus} />
-      </Callout>
-      <Callout
-        position={[X_PICK + 0.1, 2.15, Z_ROBOT]}
-        index="03"
-        title="Palletizing"
-      >
-        <LiveText read={palletStatus} />
-      </Callout>
-      <MovingCallout />
-    </>
+    <group>
+      <FactoryFloor />
+      {/* SIM-equipped machines keep full tone */}
+      <Robot base={R1_BASE} target={r1Target} />
+      <Robot base={R2_BASE} target={r2Target} />
+      <LidMagazine />
+      <QCGate />
+      <AMRUnit offset={0} payload="tote" />
+      {/* everything else is ghosted toward white */}
+      <Faded>
+        <Conveyors />
+        <Pails />
+        <Pallets />
+        <PalletDispenser />
+        <SetDressing />
+      </Faded>
+      <Anchor id="mfg-capping" position={[X_CAP - 0.25, 2.1, Z_ROBOT]} />
+      <Anchor id="mfg-qc" position={[X_QC, 2.3, 0]} />
+      <Anchor id="mfg-pallet" position={[X_PICK + 0.1, 2.15, Z_ROBOT]} />
+      <MovingAnchor />
+    </group>
   )
 }
 
-// ------------------------------------------------------------------ root
+const callouts: CalloutDef[] = [
+  { id: "mfg-capping", scene: "manufacturing", title: "Capping", bars: 4, delay: 0, status: capStatus },
+  { id: "mfg-qc", scene: "manufacturing", title: "Vision QC", bars: 4, delay: 0.55, status: qcStatus },
+  { id: "mfg-pallet", scene: "manufacturing", title: "Palletizing", bars: 3, delay: 0.3, status: palletStatus },
+  { id: "mfg-amr", scene: "manufacturing", title: "Intralogistics", bars: 3, delay: 1.1, status: amrStatus },
+]
 
-function Effects() {
-  return (
-    <EffectComposer multisampling={4} enableNormalPass={false}>
-      <N8AO
-        aoRadius={0.85}
-        distanceFalloff={0.6}
-        intensity={2.4}
-        quality="medium"
-      />
-      <Bloom
-        mipmapBlur
-        luminanceThreshold={1}
-        luminanceSmoothing={0.2}
-        intensity={0.85}
-        radius={0.6}
-      />
-      <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
-    </EffectComposer>
-  )
-}
-
-export default function FactoryScene({
-  onReady,
-  labelLayer,
-}: {
-  onReady?: () => void
-  labelLayer?: RefObject<HTMLDivElement | null>
-}) {
-  const [dpr, setDpr] = useState(() =>
-    Math.min(window.devicePixelRatio || 1, 1.75),
-  )
-  return (
-    <LabelLayer.Provider value={labelLayer ?? null}>
-      <Canvas
-        shadows
-        dpr={dpr}
-        gl={{
-          antialias: false,
-          powerPreference: "high-performance",
-          stencil: false,
-        }}
-        onCreated={({ gl }) => gl.setClearColor("#0c0e10", 0)}
-      >
-        {/* drop resolution on slower GPUs instead of dropping frames */}
-        <PerformanceMonitor onDecline={() => setDpr(1)} />
-        <ClockDriver />
-        <IsoCamera />
-        <Lights />
-        <Floor />
-        <Suspense fallback={null}>
-          <Conveyors />
-          <Robot base={R1_BASE} target={r1Target} />
-          <Robot base={R2_BASE} target={r2Target} />
-          <LidMagazine />
-          <QCGate />
-          <Pails />
-          <Pallets />
-          <PalletDispenser />
-          <AMRUnit offset={0} payload="tote" />
-          <SetDressing />
-          <Ready onReady={onReady} />
-        </Suspense>
-        {/* callouts don't load assets; keep them out of the suspense boundary so their DOM roots stay mounted */}
-        <Callouts />
-        <Effects />
-      </Canvas>
-    </LabelLayer.Provider>
-  )
-}
-
-function Ready({ onReady }: { onReady?: () => void }) {
-  useEffect(() => {
-    onReady?.()
-  }, [onReady])
-  return null
+export const manufacturing: SceneDef = {
+  id: "manufacturing",
+  view: { center: [0.2, 0.9, -0.9], span: 10.8 },
+  Component: Manufacturing,
+  callouts,
 }

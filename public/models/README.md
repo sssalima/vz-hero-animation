@@ -1,7 +1,15 @@
 # Scene assets
 
-Every model in this folder is an NVIDIA Omniverse asset, converted from OpenUSD to
-glTF (`.glb`) for the browser. Real-world scale (metres, Y-up), OmniPBR/MDL material
+Two kinds of model live here:
+
+- **Sourced third-party models** (vehicles, farm machinery, rolling stock, energy and city
+  structures in the seven industry scenes) are open-licence (CC-BY 4.0) models normalised by
+  `tools/assets/ingest.mjs` from `tools/assets/sources.json`. Titles, authors, sources and
+  licences are listed in [`CREDITS.md`](CREDITS.md) (regenerate with `node tools/assets/credits.mjs`).
+- **NVIDIA Omniverse assets** (everything else, and every model in the Manufacturing scene),
+  listed below.
+
+The NVIDIA models are converted from OpenUSD to glTF (`.glb`) for the browser. Real-world scale (metres, Y-up), OmniPBR/MDL material
 parameters and textures were carried over; meshes were decimated, given creased
 normals and meshopt-compressed (`EXT_meshopt_compression`), with textures as WebP.
 
@@ -19,7 +27,7 @@ Source: `https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/
 | `pallet_load_b02.glb` | `simready_content/common_assets/props/pallet_asm_b02_111x111x129cm_pr_v_nvd_01` |
 | `container_j01.glb`, `container_f03.glb` | `simready_content/common_assets/props/container_*` |
 | `ibctank_a01.glb` | `simready_content/common_assets/props/ibctank_a01` |
-| `steeldrum_a01.glb`, `plasticdrum_b01.glb`, `fiberdrum_a01.glb` | `simready_content/common_assets/props/*drum_*` |
+| `plasticdrum_b01.glb`, `fiberdrum_a01.glb` | `simready_content/common_assets/props/*drum_*` |
 | `exportpallet_a02.glb` | `simready_content/common_assets/props/exportpallet_a02` |
 | `tote_c01.glb`, `cubebox_a07.glb` | `simready_content/common_assets/props/tote_c01`, `cubebox_a07` |
 | `heavydutywoodcrate_a01.glb` | `simready_content/common_assets/props/heavydutywoodcrate_a01` |
@@ -29,3 +37,10 @@ Source: `https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/
 | `trafficcone_a04.glb` | `simready_content/common_assets/props/trafficcone_a04` |
 
 Use of these assets is subject to NVIDIA's Omniverse content license terms.
+
+## SIM card
+
+`public/images/sim-card.png` is not a SimReady asset: the public SimReady and Isaac Sim
+libraries don't include a SIM card, so it is a custom nano-SIM modelled and rendered with
+three.js. Re-render it by opening `/tools/sim-card-render.html` on the dev server and
+saving `window.__png`.

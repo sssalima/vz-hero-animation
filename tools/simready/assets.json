@@ -1,0 +1,175 @@
+{
+ "_comment": "SimReady / Omniverse sources for the industry scenes. Convert with: python3 tools/simready/usd2glb.py tools/simready/assets.json [names...] (after fetch.py)",
+ "pos_terminal": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Equipment/Computer_Terminal_Pos_C01_01/sm_computer_terminal_pos_c01_01.usd"
+ },
+ "order_kiosk": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Equipment/Vertical_Info_Kiosk_A01/sm_digitalSystem_infoKiosk_vertical_a01_01.usd"
+ },
+ "beverage_fridge": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Machines/Display_Beverage_Fridge_A01/sm_facilityEquipment_beverageFridge_display_a01_01.usd"
+ },
+ "range_oven": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/OEMs/ForgeCAD/Range_Oven/range_oven.usda"
+ },
+ "kitchen_counter": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Residential/Kitchen/Counters/Counter_A01/sm_fixture_counter_a01_01.usd"
+ },
+ "kitchen_island": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Residential/Kitchen/Counters/Island_A01/sm_fixture_island_a01_01.usd"
+ },
+ "range_hood": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Residential/Kitchen/Appliances/Extractor_A01/sm_appliance_extractor_a01_01.usd"
+ },
+ "steel_table": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Equipment/Stainless_Metal_Table_A03/sm_table_metal_stainless_a03_01.usd"
+ },
+ "reach_fridge": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Residential/Kitchen/Appliances/Refrigerator_A01/sm_refrigerator_a01_01.usd"
+ },
+ "wall_sink": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Equipment/Wall_Mounted_Sink_A01/sm_sanitary_sink_wallMounted_a01_01.usd"
+ },
+ "coffee_machine": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Equipment/Machine_Coffee_Vending_A01/sm_machine_coffee_vending_a01_01.usd"
+ },
+ "trash_wheeled": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Containers/TrashCan_Wheeled_Black_A01/sm_trashCan_wheeled_black_a01_01.usd"
+ },
+ "stock_pot": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Residential/Kitchen/Cooking_Gear/Kitchenware_Pan_A01/sm_kitchenware_pan_a01_01.usd"
+ },
+ "hospital_bed": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Room_and_Furniture/Bed_Hospital_Standard_A01/sm_bed_hospital_standard_a01_01.usd"
+ },
+ "patient_monitor": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Advanced_Medical_Systems/Monitors/Patient_Monitor_A01/sm_monitor_patient_a01_01.usd"
+ },
+ "infusion_pump": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Medical_Devices/Pump_Infusion_A01/sm_pump_infusion_a01_01.usd"
+ },
+ "iv_pole": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Medical_Devices/IV_Pole_A01/sm_IV_pole_a01_01.usd"
+ },
+ "ventilator": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Medical_Devices/Lung_Ventilation_Artificial_A01/sm_lung_ventilation_artificial_a01_01.usd"
+ },
+ "ultrasound": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Advanced_Medical_Systems/Ultrasound_A01/sm_ultrasound_a01_01.usd"
+ },
+ "xray_stand": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Advanced_Medical_Systems/Xray_Machine_BuckyStand_A01/sm_Xray_machine_buckyStand_a01_01.usd"
+ },
+ "xray_table": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Advanced_Medical_Systems/Xray_Machine_BuckyTable_A01/sm_Xray_machine_buckyTable_a01_01.usd"
+ },
+ "xray_arm": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Advanced_Medical_Systems/Xray_Machine_XrayArmRack_A01/sm_Xray_machine_XrayArmRack_a01_01.usd"
+ },
+ "xray_generator": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Advanced_Medical_Systems/Xray_Machine_HVgenerator_A01/sm_Xray_machine_HVgenerator_a01_01.usd"
+ },
+ "robotic_system": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Robotic_Systems/Robotic_System_A01/sm_robotic_system_a01_01.usd"
+ },
+ "surgical_table": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Room_and_Furniture/Table_Surgical_A01/sm_table_surgical_a01_01.usd"
+ },
+ "anesthesia": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Medical_Devices/Anesthesia_Machine_A01/sm_anesthesia_machine_a01_01.usd"
+ },
+ "surgical_light": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Lamps/Light_Surgical_Ceiling_Arm_A01/sm_light_surgical_ceiling_arm_a01_01.usd"
+ },
+ "bedside_table": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Room_and_Furniture/Table_Bedside_B01/sm_table_bedside_b01_01.usd"
+ },
+ "hospital_chair": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Room_and_Furniture/Chairs/Chair_B01/sm_chair_hospital_b01_01.usd"
+ },
+ "drug_cabinet": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Room_and_Furniture/Cabinet_For_Drugs_A01/sm_cabinet_for_drugs_a01_01.usd"
+ },
+ "medical_cart": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Trolleys/Cart_Medical_Utility_A01/sm_cart_medical_utility_a01_01.usd"
+ },
+ "diagnostic_cart": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Advanced_Medical_Systems/Diagnostic_Equipment_Cart_A01/sm_cart_equipment_diagnostic_a01_01.usd"
+ },
+ "bed_head_unit": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Medical_Devices/Unit_Head_Bed_A01/sm_unit_head_bed_a01_01.usd"
+ },
+ "waste_bin": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Hospital/Room_and_Furniture/Waste_Bin_A01/sm_bin_waste_a01_01.usd"
+ },
+ "forklift_auto": {
+  "src": "Assets/Isaac/6.2/Isaac/Robots/IsaacSim/ForkliftC/forklift_c.usd",
+  "args": [
+   "--keep",
+   "^(lift|fork|mast)"
+  ]
+ },
+ "pallet_jack": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Equipment/Heavy_Duty_Pallet_Jack_A01/sm_palletJack_heavyDuty_a01_01.usd"
+ },
+ "rack_large": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Racks/Large_Empty_Rack_A01/sm_rack_large_empty_a01_01.usd"
+ },
+ "pallet_wrapped": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Pallets/Pallet_Assembly_A02/sm_pallet_assembly_a02_01.usd"
+ },
+ "security_cage": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Security/Wire_SecurityRoom_B01/sm_wire_securityRoom_b01_01.usd"
+ },
+ "dock_board": {
+  "src": "Assets/DigitalTwin/Assets/Warehouse/Equipment/Ramps/DockBoard_A/DockBoard_A01_PR_NVD_01.usd"
+ },
+ "utility_pole": {
+  "src": "Assets/Isaac/4.2/Isaac/Environments/Outdoor/Rivermark/dsready_content/nv_content/common_assets/props_poles/double_utility_pole_65ft/double_utility_pole_65ft.usd"
+ },
+ "signal_arm": {
+  "src": "Assets/Isaac/4.2/Isaac/Environments/Outdoor/Rivermark/dsready_content/nv_content/common_assets/props_poles/signalarm_modern_01_20ft/signalarm_modern_01_20ft.usd"
+ },
+ "crosswalk_signal": {
+  "src": "Assets/Isaac/4.2/Isaac/Environments/Outdoor/Rivermark/dsready_content/nv_content/common_assets/props_general/crosswalk_signal_01/crosswalk_signal_01.usd"
+ },
+ "led_streetlamp": {
+  "src": "Assets/Isaac/4.2/Isaac/Environments/Outdoor/Rivermark/dsready_content/nv_content/common_assets/props_poles/streetlamp_led_01/streetlamp_led_01.usd"
+ },
+ "lamppost_double": {
+  "src": "Assets/Isaac/4.2/Isaac/Environments/Outdoor/Rivermark/dsready_content/nv_content/common_assets/props_general/lamppost_double_01/lamppost_double_01.usd"
+ },
+ "bench": {
+  "src": "Assets/Isaac/4.2/Isaac/Environments/Outdoor/Rivermark/dsready_content/nv_content/common_assets/props_general/bench_curved_01/bench_curved_01.usd"
+ },
+ "bike_rack": {
+  "src": "Assets/Isaac/4.2/Isaac/Environments/Outdoor/Rivermark/dsready_content/nv_content/common_assets/props_general/bike_rack_01/bike_rack_01.usd"
+ },
+ "bollard": {
+  "src": "Assets/Isaac/4.2/Isaac/Environments/Outdoor/Rivermark/dsready_content/nv_content/common_assets/props_general/bollard_01/bollard_01.usd"
+ },
+ "hydrant": {
+  "src": "Assets/Isaac/4.2/Isaac/Environments/Outdoor/Rivermark/dsready_content/nv_content/common_assets/props_general/firehydrant01/firehydrant01.usd"
+ },
+ "city_trashcan": {
+  "src": "Assets/Isaac/4.2/Isaac/Environments/Outdoor/Rivermark/dsready_content/nv_content/common_assets/props_general/trashcan_square_01/trashcan_square_01.usd"
+ },
+ "small_cell": {
+  "src": "Assets/Isaac/4.2/Isaac/Environments/Outdoor/Rivermark/dsready_content/nv_content/common_assets/props_poles/cellular_antenna/cellular_antenna.usd"
+ },
+ "security_cam_a": {
+  "src": "Assets/DigitalTwin/Assets/Warehouse/Electronics/Cameras/Security_A/SecurityCamera_A01_01.usd"
+ },
+ "security_cam_d": {
+  "src": "Assets/DigitalTwin/Assets/Warehouse/Electronics/Cameras/Security_D/SecurityCamera_D01_01.usd"
+ },
+ "plywood_crate": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Containers/Plywood_Crate_B01_01/sm_crate_plywood_b01_01.usd"
+ },
+ "green_crate": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Warehouse/Containers/Green_Crate_A01_01/sm_crate_green_a01_01.usd"
+ },
+ "wheelbarrow": {
+  "src": "Assets/Isaac/6.2/Isaac/SimReady/Industrial/Equipment/Construction_Wheelbarrow_Metal_A01/sm_construction_wheelbarrow_metal_a01_01.usd"
+ }
+}

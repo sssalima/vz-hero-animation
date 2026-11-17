@@ -1,0 +1,492 @@
+{
+  "car_sedan": {
+    "size": [
+      4.8,
+      1.587,
+      1.881
+    ],
+    "tris": 6004,
+    "parts": {},
+    "from": "car_sedan.a"
+  },
+  "car_hatch": {
+    "size": [
+      4.1,
+      1.539,
+      1.837
+    ],
+    "tris": 5994,
+    "parts": {},
+    "from": "car_hatch.a"
+  },
+  "car_suv": {
+    "size": [
+      4.8,
+      1.701,
+      2.129
+    ],
+    "tris": 6074,
+    "parts": {},
+    "from": "car_suv.a"
+  },
+  "box_truck": {
+    "size": [
+      7.8,
+      3.065,
+      2.605
+    ],
+    "tris": 13677,
+    "parts": {},
+    "from": "box_truck.a"
+  },
+  "semi_tractor": {
+    "size": [
+      5.662,
+      3.9,
+      2.826
+    ],
+    "tris": 19664,
+    "parts": {},
+    "from": "semi_tractor.a"
+  },
+  "semi_trailer": {
+    "size": [
+      13.6,
+      3.926,
+      2.498
+    ],
+    "tris": 11965,
+    "parts": {},
+    "from": "semi_trailer.a"
+  },
+  "service_van": {
+    "size": [
+      5.9,
+      2.213,
+      2.036
+    ],
+    "tris": 24989,
+    "parts": {},
+    "from": "service_van.a"
+  },
+  "service_pickup": {
+    "size": [
+      5.5,
+      1.955,
+      2.187
+    ],
+    "tris": 21870,
+    "parts": {},
+    "from": "service_pickup.a"
+  },
+  "pickup_ladder": {
+    "size": [
+      4.4,
+      0.087,
+      0.265
+    ],
+    "tris": 2999,
+    "parts": {},
+    "from": "pickup_ladder.b"
+  },
+  "guardrail": {
+    "size": [
+      3.709,
+      0.59,
+      0.253
+    ],
+    "tris": 1116,
+    "parts": {},
+    "from": "guardrail.a"
+  },
+  "sign_gantry": {
+    "size": [
+      10.591,
+      7.4,
+      0.377
+    ],
+    "tris": 1104,
+    "parts": {},
+    "from": "sign_gantry.b"
+  },
+  "tree": {
+    "size": [
+      5.879,
+      8,
+      5.957
+    ],
+    "tris": 5859,
+    "parts": {},
+    "from": "tree.a"
+  },
+  "street_cabinet": {
+    "size": [
+      1.171,
+      1.6,
+      0.43
+    ],
+    "tris": 124,
+    "parts": {},
+    "from": "street_cabinet.a"
+  },
+  "combine": {
+    "size": [
+      10.883,
+      4,
+      5.081
+    ],
+    "tris": 33773,
+    "parts": {},
+    "from": "combine.a"
+  },
+  "tractor": {
+    "size": [
+      4.77,
+      3,
+      2.59
+    ],
+    "tris": 24999,
+    "parts": {},
+    "from": "tractor.a"
+  },
+  "grain_bin": {
+    "size": [
+      4.888,
+      11,
+      13.472
+    ],
+    "tris": 8968,
+    "parts": {
+      "bin": {
+        "pivot": [
+          0.003,
+          0.158,
+          4.295
+        ],
+        "tris": 1775
+      }
+    },
+    "from": "grain_bin.c"
+  },
+  "barn": {
+    "size": [
+      17.936,
+      9,
+      15.586
+    ],
+    "tris": 9255,
+    "parts": {},
+    "from": "barn.a"
+  },
+  "machine_shed": {
+    "size": [
+      10.866,
+      6,
+      6.523
+    ],
+    "tris": 8015,
+    "parts": {},
+    "from": "machine_shed.a"
+  },
+  "crop": {
+    "size": [
+      0.708,
+      1.05,
+      0.76
+    ],
+    "tris": 360,
+    "parts": {},
+    "from": "crop.b"
+  },
+  "farm_fence": {
+    "size": [
+      2.6,
+      1.252,
+      0.244
+    ],
+    "tris": 676,
+    "parts": {},
+    "from": "farm_fence.e"
+  },
+  "wind_turbine": {
+    "size": [
+      3.247,
+      20,
+      12.932
+    ],
+    "tris": 29998,
+    "parts": {
+      "rotor": {
+        "pivot": [
+          1.45,
+          12.31,
+          -0.465
+        ],
+        "tris": 14586
+      }
+    },
+    "from": "wind_turbine.c"
+  },
+  "solar_table": {
+    "size": [
+      2,
+      0.093,
+      4.004
+    ],
+    "tris": 3864,
+    "parts": {},
+    "from": "solar_table.d"
+  },
+  "inverter": {
+    "size": [
+      2.794,
+      2.2,
+      0.63
+    ],
+    "tris": 14999,
+    "parts": {},
+    "from": "inverter.c"
+  },
+  "transformer": {
+    "size": [
+      6.952,
+      4.5,
+      5.376
+    ],
+    "tris": 6772,
+    "parts": {},
+    "from": "transformer.a"
+  },
+  "substation_bay": {
+    "size": [
+      17.974,
+      7,
+      8.132
+    ],
+    "tris": 30270,
+    "parts": {},
+    "from": "substation_bay.d"
+  },
+  "control_house": {
+    "size": [
+      11.804,
+      3.3,
+      4.778
+    ],
+    "tris": 2066,
+    "parts": {},
+    "from": "control_house.c"
+  },
+  "metro_car": {
+    "size": [
+      15.5,
+      2.801,
+      2.247
+    ],
+    "tris": 14472,
+    "parts": {},
+    "from": "metro_car.a"
+  },
+  "subway_tunnel": {
+    "size": [
+      3.745,
+      5.4,
+      5.567
+    ],
+    "tris": 14998,
+    "parts": {},
+    "from": "subway_tunnel.b"
+  },
+  "subway_station": {
+    "size": [
+      8.613,
+      6.606,
+      10.653
+    ],
+    "tris": 29993,
+    "parts": {},
+    "from": "subway_station.a"
+  },
+  "subway_entrance": {
+    "size": [
+      4.66,
+      8.512,
+      14.702
+    ],
+    "tris": 5628,
+    "parts": {},
+    "from": "subway_entrance.a"
+  },
+  "traffic_signal": {
+    "size": [
+      0.32,
+      0.85,
+      0.451
+    ],
+    "tris": 3753,
+    "parts": {
+      "red": {
+        "pivot": [
+          -0.003,
+          0.71,
+          0.033
+        ],
+        "tris": 270
+      },
+      "amber": {
+        "pivot": [
+          -0.003,
+          0.426,
+          0.033
+        ],
+        "tris": 270
+      },
+      "green": {
+        "pivot": [
+          -0.003,
+          0.143,
+          0.033
+        ],
+        "tris": 270
+      }
+    },
+    "from": "traffic_signal.b"
+  },
+  "ev_charger": {
+    "size": [
+      0.226,
+      1.7,
+      1.123
+    ],
+    "tris": 5027,
+    "parts": {},
+    "from": "ev_charger.b"
+  },
+  "city_building": {
+    "size": [
+      25.796,
+      10,
+      13.17
+    ],
+    "tris": 2705,
+    "parts": {},
+    "from": "city_building.a"
+  },
+  "shipping_container": {
+    "size": [
+      6.06,
+      2.423,
+      3.053
+    ],
+    "tris": 17077,
+    "parts": {},
+    "from": "shipping_container.a"
+  },
+  "dock_door": {
+    "size": [
+      2.794,
+      6.5,
+      7.027
+    ],
+    "tris": 2069,
+    "parts": {},
+    "from": "dock_door.c"
+  },
+  "warehouse_wall": {
+    "size": [
+      0.425,
+      6.5,
+      3.514
+    ],
+    "tris": 3999,
+    "parts": {},
+    "from": "warehouse_wall.a"
+  },
+  "nurse_station": {
+    "size": [
+      2.7,
+      1.187,
+      2.698
+    ],
+    "tris": 4000,
+    "parts": {},
+    "from": "nurse_station.c"
+  },
+  "hospital_screen": {
+    "size": [
+      0.604,
+      1.943,
+      1.433
+    ],
+    "tris": 2979,
+    "parts": {},
+    "from": "hospital_screen.a"
+  },
+  "bistro_table": {
+    "size": [
+      0.615,
+      0.75,
+      0.615
+    ],
+    "tris": 1078,
+    "parts": {},
+    "from": "bistro_table.c"
+  },
+  "walk_in_cooler": {
+    "size": [
+      1.7,
+      2.55,
+      0.802
+    ],
+    "tris": 19999,
+    "parts": {
+      "door_l": {
+        "pivot": [
+          -0.85,
+          0,
+          0.38
+        ],
+        "tris": 222
+      },
+      "door_r": {
+        "pivot": [
+          0.85,
+          0,
+          0.38
+        ],
+        "tris": 215
+      }
+    },
+    "from": "walk_in_cooler.a"
+  },
+  "city_store": {
+    "size": [
+      37.697,
+      10,
+      13.122
+    ],
+    "tris": 2754,
+    "parts": {},
+    "from": "city_store.c"
+  },
+  "city_office": {
+    "size": [
+      10.023,
+      10,
+      10.083
+    ],
+    "tris": 2616,
+    "parts": {},
+    "from": "city_office.d"
+  },
+  "bess": {
+    "size": [
+      5.97,
+      2.423,
+      2.885
+    ],
+    "tris": 13027,
+    "parts": {},
+    "from": "bess.a"
+  }
+}

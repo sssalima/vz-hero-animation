@@ -19,7 +19,13 @@ type Controls = {
   paused: boolean
   labels: boolean
 }
-let controls: Controls = { paused: !!prefersReducedMotion, labels: true }
+// dev aid: `?paused` starts frozen (handy with `?t=` to inspect a dissolve)
+const startPaused =
+  typeof location !== "undefined" && new URLSearchParams(location.search).has("paused")
+let controls: Controls = {
+  paused: !!prefersReducedMotion || startPaused,
+  labels: true,
+}
 const listeners = new Set<() => void>()
 
 export function setControls(patch: Partial<Controls>) {
